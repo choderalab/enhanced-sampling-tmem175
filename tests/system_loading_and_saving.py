@@ -61,10 +61,7 @@ def main():
 
     system.addForce(vbond_force)
 
-    platform = mm.Platform.getPlatformByName(param_dict_with_units['platform'])
-
-    platform.setPropertyDefaultValue('Precision', param_dict_with_units['precision'])
-    platform.setPropertyDefaultValue('DeterministicForces', 'true')
+    platform = sb.get_platform_from_params(param_dict_with_units)
 
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,

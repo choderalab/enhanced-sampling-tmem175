@@ -66,3 +66,13 @@ def build_virtual_bond(psf, param_dict_with_units):
     force.addBond(int(atom1), int(atom2))
 
     return force
+
+def get_platform_from_params(param_dict_with_units):
+    platform_name = param_dict_with_units['platform']
+    platform = openmm.Platform.getPlatformByName(platform_name)
+
+    if not platform_name == 'CPU':
+        platform.setPropertyDefaultValue('Precision', param_dict_with_units['precision'])
+        platform.setPropertyDefaultValue('DeterministicForces', 'true')
+
+    return platform

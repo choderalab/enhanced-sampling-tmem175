@@ -1,0 +1,9 @@
+'2022-09-07T13:50:20.759508':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    output_dir: /Users/alexpayne/Scientific_Projects/local_test/enhanced_sampling
+    params_file: ../sim_params/defaults.yaml
+  notes: ''
+  script: system_loading_and_saving.py
+  success: ''

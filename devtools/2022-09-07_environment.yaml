@@ -1,0 +1,15 @@
+name: enhanced-sampling-tmem175
+channels:
+  - schrodinger
+  - salilab
+  - openeye
+  - conda-forge
+  - http://conda.anaconda.org/omnia
+  - defaults
+dependencies:
+  - python=3.9
+  - openmm
+  - pyyaml
+  - mdtraj
+  - numpy
+prefix: /Users/alexpayne/opt/anaconda3/envs/enhanced-sampling-tmem175

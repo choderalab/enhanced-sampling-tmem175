@@ -1,4 +1,4 @@
-hydrogen_mass: 1.0 # unit.amu
+hydrogen_mass: 4.0 # unit.amu
 temperature: 303.15 # unit.kelvin
 friction: 1 # per unit.picoseconds
 time_step: 0.002 # unit.picoseconds

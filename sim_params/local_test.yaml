@@ -18,5 +18,5 @@ virtual_bond:
   - resSeq 46 and name CA and chainid 0   # mdtraj selection syntax
   - resSeq 46 and name CA and chainid 1
 
-platform: CUDA
+platform: CPU
 precision: mixed

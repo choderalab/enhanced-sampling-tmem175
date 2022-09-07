@@ -1,10 +1,12 @@
 ## IMPORTS
 from argparse import ArgumentParser
 import os, sys
+import openmm as mm
+import openmm.app
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb
+from enhanced_sampling import utils, system_building as sb, system_saving as ss
 
 ## ARGUMENT PARSING
 def get_args():
@@ -32,12 +34,54 @@ def main():
     psf = input_dict["psf"]
     print(psf.topology)
 
-    units_dict = sb.load_simulation_params(args.params_file)
-    print(units_dict)
+    param_dict_with_units = sb.load_simulation_params(args.params_file)
+    print(param_dict_with_units)
+
+    system = psf.createSystem(input_dict["params"],
+                              nonbondedMethod=param_dict_with_units['nonbonded_method'],
+                              constraints=param_dict_with_units['constraints'],
+                              removeCMMotion=False,
+                              hydrogenMass=param_dict_with_units['hydrogen_mass'])
+
+    integrator = mm.LangevinMiddleIntegrator(param_dict_with_units['temperature'],
+                                          param_dict_with_units['friction'],
+                                          param_dict_with_units['time_step'])
+
+    barostat = mm.MonteCarloMembraneBarostat(param_dict_with_units['pressure'],
+                                             param_dict_with_units['surface_tension'],
+                                             param_dict_with_units['temperature'],
+                                             mm.MonteCarloMembraneBarostat.XYIsotropic,
+                                             mm.MonteCarloMembraneBarostat.ZFree
+                                             )
+    barostat.setFrequency(50)  ## for some reason the __init__ won't accept it as an argument, but this works
+    ## the default is 25 timesteps, i've set it for 50
+    system.addForce(barostat)
+
+    vbond_force = sb.build_virtual_bond(psf, param_dict_with_units)
+
+    system.addForce(vbond_force)
+
+    platform = mm.Platform.getPlatformByName(param_dict_with_units['platform'])
+
+    platform.setPropertyDefaultValue('Precision', param_dict_with_units['precision'])
+    platform.setPropertyDefaultValue('DeterministicForces', 'true')
+
+    sim = openmm.app.Simulation(psf.topology,
+                                system=system,
+                                integrator=integrator,
+                                platform=platform)
+
+    sim.context.setPositions(input_dict['cif'].positions)
+    sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
+
+    ss.write_simulation_files(sim, args.output_dir)
+
 
     utils.save_env()
     utils.write_to_log(args,
                        os.path.basename(__file__))
+
+
 
 
 ## RUN COMMAND

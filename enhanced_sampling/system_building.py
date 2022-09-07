@@ -4,20 +4,25 @@ import json, os, yaml
 from simtk import unit
 import mdtraj
 
-def load_input_dir(input_dir, charmm_param_dir):
+def load_input_dir(input_dir, charmm_param_dir=None):
     assert os.path.exists(input_dir)
 
     ## load psf
     psf_path = os.path.join(input_dir, "step5_input.psf")
+    print(f"Loading psf from {psf_path}")
     psf = CharmmPsfFile(psf_path)
-
-    param_paths = [os.path.join(charmm_param_dir, path) for path in os.listdir(charmm_param_dir)]
-    params = CharmmParameterSet(*param_paths)
+    if charmm_param_dir:
+        param_paths = [os.path.join(charmm_param_dir, path) for path in os.listdir(charmm_param_dir)]
+        params = CharmmParameterSet(*param_paths)
+    else:
+        params = None
 
     cif_path = os.path.join(input_dir, "final_frame.cif")
+    print(f"Loading positions from {cif_path}")
     cif = PDBxFile(cif_path)
 
     dat_file_path = os.path.join(input_dir, "sysinfo.dat")
+    print(f"Loading box vectors from {dat_file_path}")
 
     x, y, z = load_xyz_from_datfile(dat_file_path)
 

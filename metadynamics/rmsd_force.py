@@ -69,32 +69,32 @@ def main():
 
     platform = sb.get_platform_from_params(param_dict_with_units)
 
-    ref_dict = sb.load_input_dir(args.reference_dir)
-    ref_psf = ref_dict['psf']
-    ref_cif = ref_dict['cif']
-
-    assert len(ref_cif.positions) == len(cif.positions)
-
-    idx = [atom.index for atom in ref_psf.topology.atoms() if
-           atom.residue.chain.index == 0 or atom.residue.chain.index == 1]
-
-    rmsd_force = openmm.RMSDForce(ref_cif.positions, idx)
-
-    rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-                                                     minValue=0.01,
-                                                     maxValue=4,
-                                                     biasWidth=0.02,
-                                                     periodic=False)
-
-    meta = openmm.app.Metadynamics(system=system,
-                                   variables=[rmsd_bias],
-                                   temperature=param_dict_with_units['temperature'],
-                                   biasFactor=2,
-                                   height=1,
-                                   frequency=1,
-                                   saveFrequency=1,
-                                   biasDir=args.output_dir
-                                   )
+    # ref_dict = sb.load_input_dir(args.reference_dir)
+    # ref_psf = ref_dict['psf']
+    # ref_cif = ref_dict['cif']
+    #
+    # assert len(ref_cif.positions) == len(cif.positions)
+    #
+    # idx = [atom.index for atom in ref_psf.topology.atoms() if
+    #        atom.residue.chain.index == 0 or atom.residue.chain.index == 1]
+    #
+    # rmsd_force = openmm.RMSDForce(ref_cif.positions, idx)
+    #
+    # rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
+    #                                                  minValue=0.01,
+    #                                                  maxValue=0.4,
+    #                                                  biasWidth=0.02,
+    #                                                  periodic=False)
+    #
+    # meta = openmm.app.Metadynamics(system=system,
+    #                                variables=[rmsd_bias],
+    #                                temperature=param_dict_with_units['temperature'],
+    #                                biasFactor=2,
+    #                                height=1,
+    #                                frequency=1,
+    #                                saveFrequency=1,
+    #                                biasDir=args.output_dir
+    #                                )
 
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,
@@ -103,13 +103,13 @@ def main():
 
     sim.context.setPositions(cif.positions)
     sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
-    print(meta.getCollectiveVariables(sim))
-    print("Minimizing energy")
-    sim.minimizeEnergy()
+    # print(meta.getCollectiveVariables(sim))
+    # print("Minimizing energy")
+    # sim.minimizeEnergy()
     # meta.step(sim, 10)
     print("Running simulation")
     sim.step(10)
-    print(meta.getCollectiveVariables(sim))
+    # print(meta.getCollectiveVariables(sim))
 
     print(f"Writing simulation files to {args.output_dir}")
     ss.write_simulation_files(sim, args.output_dir)

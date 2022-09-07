@@ -21,6 +21,11 @@ def determine_log_file():
     log_path = os.path.join("../log", f"{datetime.date.today().isoformat()}_log.yaml")
     return log_path
 
+def prep_output_dir(output_dir):
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+    assert os.path.exists(output_dir)
+
 
 def load_yaml(file_path):
     file_path = os.path.join(file_path)

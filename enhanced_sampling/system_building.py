@@ -14,7 +14,7 @@ def load_input_dir(input_dir, charmm_param_dir):
     param_paths = [os.path.join(charmm_param_dir, path) for path in os.listdir(charmm_param_dir)]
     params = CharmmParameterSet(*param_paths)
 
-    cif_path = os.path.join(input_dir, "equilibrated.cif")
+    cif_path = os.path.join(input_dir, "final_frame.cif")
     cif = PDBxFile(cif_path)
 
     dat_file_path = os.path.join(input_dir, "sysinfo.dat")

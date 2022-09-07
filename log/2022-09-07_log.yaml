@@ -7,12 +7,12 @@
   notes: ''
   script: system_loading_and_saving.py
   success: ''
-'2022-09-07T14:03:12.157241':
+'2022-09-07T14:41:16.383986':
   args:
     charmm_param_dir: ../forcefield_data/charmm-params
     input_dir: ../systems/system00
     output_dir: /Users/alexpayne/Scientific_Projects/local_test/enhanced_sampling
-    params_file: ../sim_params/defaults.yaml
+    params_file: ../sim_params/local_test.yaml
   notes: ''
   script: system_loading_and_saving.py
   success: ''

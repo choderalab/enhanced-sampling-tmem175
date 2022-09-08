@@ -34,7 +34,7 @@ def main():
 
     utils.prep_output_dir(args.output_dir)
     input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir)
-    print(input_dict)
+    print(input_dict.keys())
     psf = input_dict["psf"]
     print(psf.topology)
 
@@ -48,51 +48,54 @@ def main():
                               hydrogenMass=param_dict_with_units['hydrogen_mass'])
 
     integrator = openmm.LangevinMiddleIntegrator(param_dict_with_units['temperature'],
-                                             param_dict_with_units['friction'],
-                                             param_dict_with_units['time_step'])
+                                                 param_dict_with_units['friction'],
+                                                 param_dict_with_units['time_step'])
 
     barostat = openmm.MonteCarloMembraneBarostat(param_dict_with_units['pressure'],
-                                             param_dict_with_units['surface_tension'],
-                                             param_dict_with_units['temperature'],
-                                             openmm.MonteCarloMembraneBarostat.XYIsotropic,
-                                             openmm.MonteCarloMembraneBarostat.ZFree
-                                             )
-    barostat.setFrequency(50)  ## for some reason the __init__ won't accept it as an argument, but this works
-    ## the default is 25 timesteps, i've set it for 50
+                                                 param_dict_with_units['surface_tension'],
+                                                 param_dict_with_units['temperature'],
+                                                 openmm.MonteCarloMembraneBarostat.XYIsotropic,
+                                                 openmm.MonteCarloMembraneBarostat.ZFree
+                                                 )
+
+    # for some reason the __init__ won't accept it as an argument, but this works
+    # the default is 25 timesteps, i've set it for 50
+    barostat.setFrequency(50)
+
     system.addForce(barostat)
 
-    # vbond_force = sb.build_virtual_bond(psf, param_dict_with_units)
+    vbond_force = sb.build_virtual_bond(psf, param_dict_with_units)
 
-    # system.addForce(vbond_force)
+    system.addForce(vbond_force)
 
     platform = sb.get_platform_from_params(param_dict_with_units)
 
-    # ref_dict = sb.load_input_dir(args.reference_dir)
-    # ref_psf = ref_dict['psf']
-    # ref_cif = ref_dict['cif']
-    #
-    # assert len(ref_cif.positions) == len(cif.positions)
-    #
-    # idx = [atom.index for atom in ref_psf.topology.atoms() if
-    #        atom.residue.chain.index == 0 or atom.residue.chain.index == 1]
-    #
-    # rmsd_force = openmm.RMSDForce(ref_cif.positions, idx)
-    #
-    # rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-    #                                                  minValue=0.01,
-    #                                                  maxValue=0.4,
-    #                                                  biasWidth=0.02,
-    #                                                  periodic=False)
-    #
-    # meta = openmm.app.Metadynamics(system=system,
-    #                                variables=[rmsd_bias],
-    #                                temperature=param_dict_with_units['temperature'],
-    #                                biasFactor=2,
-    #                                height=1,
-    #                                frequency=1,
-    #                                saveFrequency=1,
-    #                                biasDir=args.output_dir
-    #                                )
+    ref_dict = sb.load_input_dir(args.reference_dir)
+    ref_psf = ref_dict['psf']
+    ref_positions = ref_dict['positions']
+
+    assert len(ref_positions) == len(input_dict["positions"])
+
+    idx = [atom.index for atom in ref_psf.topology.atoms() if
+           atom.residue.chain.index == 0 or atom.residue.chain.index == 1]
+
+    rmsd_force = openmm.RMSDForce(ref_positions, idx)
+
+    rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
+                                                     minValue=0.01,
+                                                     maxValue=0.4,
+                                                     biasWidth=0.02,
+                                                     periodic=False)
+
+    meta = openmm.app.Metadynamics(system=system,
+                                   variables=[rmsd_bias],
+                                   temperature=param_dict_with_units['temperature'],
+                                   biasFactor=2,
+                                   height=1,
+                                   frequency=1,
+                                   saveFrequency=1,
+                                   biasDir=args.output_dir
+                                   )
 
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,
@@ -100,10 +103,8 @@ def main():
                                 platform=platform)
     sim.context.setState(input_dict["state"])
 
-    # sim.context.setPositions(input_dict["positions"])
-    # sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
-    # print(meta.getCollectiveVariables(sim))
-    ## Run minimization
+    print(meta.getCollectiveVariables(sim))
+
     print(
         "  initial : %8.3f kcal/mol"
         % (
@@ -111,15 +112,14 @@ def main():
                 / openmm.unit.kilocalories_per_mole
         )
     )
-    # meta.step(sim, 10)
     print("Running simulation")
-    sim.step(10)
-    # print(meta.getCollectiveVariables(sim))
+    meta.step(sim, param_dict_with_units["nsteps"])
+    print(meta.getCollectiveVariables(sim))
 
     sim.reporters.append(
         openmm.app.StateDataReporter(
             os.path.join(args.output_dir, "simulation_log.txt"),
-            reportInterval=1,
+            reportInterval=param_dict_with_units["report_freq"],
             step=True,
             time=True,
             potentialEnergy=True,
@@ -128,7 +128,7 @@ def main():
             speed=True,
             progress=True,
             remainingTime=True,
-            totalSteps=10,
+            totalSteps=param_dict_with_units["nsteps"],
             separator="\t",
         )
     )

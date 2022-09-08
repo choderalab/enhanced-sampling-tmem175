@@ -51,7 +51,7 @@ def save_env():
     os.system(f"conda env export --from-history > ../devtools/{datetime.date.today().isoformat()}_environment.yaml")
 
 
-def write_to_log(args, python_script_name):
+def write_to_log(args, python_script_name, *dict_list):
     print("Writing log")
     log_path = determine_log_file()
     if not os.path.exists(log_path):
@@ -59,10 +59,12 @@ def write_to_log(args, python_script_name):
     else:
         yaml_dict = load_yaml(log_path)
     time = datetime.datetime.now().isoformat()
-    yaml_dict[time] = {"args": args_to_dict(args),
+    log_dict = {"args": args_to_dict(args),
                        "script": python_script_name,
                        "notes": '',
                        "success": ''}
+    log_dict.update(*dict_list)
+    yaml_dict[time] = log_dict
     write_yaml(yaml_dict, log_path)
 
 def convert_mdtraj_resid_to_resn(resid: int, n_residues=447):

@@ -1,16 +1,18 @@
-import openmm
+import openmm, json, os, yaml, mdtraj, bz2
 from openmm.app import CharmmParameterSet, CharmmPsfFile, PDBFile, PDBxFile
-import json, os, yaml
 from simtk import unit
-import mdtraj
 
-def load_input_dir(input_dir, charmm_param_dir=None):
+
+def load_input_dir(input_dir,
+                   charmm_param_dir=None,
+                   from_state=True):
     assert os.path.exists(input_dir)
 
     ## load psf
     psf_path = os.path.join(input_dir, "step5_input.psf")
     print(f"Loading psf from {psf_path}")
     psf = CharmmPsfFile(psf_path)
+
     if charmm_param_dir:
         print(f"Loading Charmm params from {charmm_param_dir}")
         param_paths = [os.path.join(charmm_param_dir, path) for path in os.listdir(charmm_param_dir)]
@@ -18,25 +20,23 @@ def load_input_dir(input_dir, charmm_param_dir=None):
     else:
         params = None
 
-    cif_path = os.path.join(input_dir, "final_frame.cif")
-    print(f"Loading positions from {cif_path}")
-    cif = PDBxFile(cif_path)
+    input_state_path = os.path.join(input_dir, "state.xml.bz2")
+    with bz2.open(input_state_path, 'rb') as infile:
+        state = openmm.XmlSerializer.deserialize(infile.read().decode())
 
-    dat_file_path = os.path.join(input_dir, "sysinfo.dat")
-    print(f"Loading box vectors from {dat_file_path}")
+    x, y, z = state.getPeriodicBoxVectors()
+    psf.setBox(x[0], y[1], z[2])
 
-    x, y, z = load_xyz_from_datfile(dat_file_path)
+    return {"psf": psf, "params": params, "state": state}
 
-    psf.setBox(x, y, z)
-
-    return {"psf": psf, "params": params, "cif": cif}
 
 def load_xyz_from_datfile(dat_file_path):
     with open(dat_file_path) as file:
         data = json.load(file)
         x, y, z = map(float, data['dimensions'][:3]) * unit.angstroms
     print(f'Setting box size x: {x}, y: {y}, z:{z}')
-    return (x,y,z)
+    return (x, y, z)
+
 
 def load_simulation_params(param_file):
     with open(param_file) as f:
@@ -60,6 +60,7 @@ def load_simulation_params(param_file):
 
     return params_dict_with_units
 
+
 def build_virtual_bond(psf, param_dict_with_units):
     vbond_selections = param_dict_with_units.get('virtual_bond')
     print(vbond_selections)
@@ -72,6 +73,7 @@ def build_virtual_bond(psf, param_dict_with_units):
     force.addBond(int(atom1), int(atom2))
 
     return force
+
 
 def get_platform_from_params(param_dict_with_units):
     platform_name = param_dict_with_units['platform']

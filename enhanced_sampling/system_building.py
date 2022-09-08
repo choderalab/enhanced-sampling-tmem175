@@ -40,6 +40,28 @@ def load_xyz_from_datfile(dat_file_path):
     return (x, y, z)
 
 
+class SimParams():
+    def __init__(self, param_file):
+        with open(param_file) as f:
+            param_dict = yaml.safe_load(f)
+
+        params_dict_with_units = {}
+        self.hydrogen_mass = param_dict['hydrogen_mass'] * unit.amu
+        self.temperature = param_dict['temperature'] * unit.kelvin
+        self.friction = param_dict['friction'] / unit.picoseconds
+        self.time_step = param_dict['time_step'] * unit.picoseconds
+        self.pressure = param_dict['pressure'] * unit.bar
+        self.surface_tension = param_dict['surface_tension']
+
+        self.nonbonded_method = getattr(openmm.app, param_dict['nonbonded_method'])
+        self.constraints = getattr(openmm.app, param_dict['constraints'])
+
+        ## add everything else to the that isn't already there
+        for key, value in param_dict.items():
+            if not getattr(self, key, False):
+                self.__setattr__(key, value)
+
+
 def load_simulation_params(param_file):
     with open(param_file) as f:
         param_dict = yaml.safe_load(f)

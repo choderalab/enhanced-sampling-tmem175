@@ -61,32 +61,13 @@ class SimParams():
             if not getattr(self, key, False):
                 self.__setattr__(key, value)
 
+    def __str__(self):
+        repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]
+        repr_string = "\n".join(repr_list)
+        return repr_string
 
-def load_simulation_params(param_file):
-    with open(param_file) as f:
-        param_dict = yaml.safe_load(f)
-
-    params_dict_with_units = {}
-    params_dict_with_units['hydrogen_mass'] = param_dict['hydrogen_mass'] * unit.amu
-    params_dict_with_units['temperature'] = param_dict['temperature'] * unit.kelvin
-    params_dict_with_units['friction'] = param_dict['friction'] / unit.picoseconds
-    params_dict_with_units['time_step'] = param_dict['time_step'] * unit.picoseconds
-    params_dict_with_units['pressure'] = param_dict['pressure'] * unit.bar
-    params_dict_with_units['surface_tension'] = param_dict['surface_tension']
-
-    params_dict_with_units['nonbonded_method'] = getattr(openmm.app, param_dict['nonbonded_method'])
-    params_dict_with_units['constraints'] = getattr(openmm.app, param_dict['constraints'])
-
-    ## add everything else to the dictionary that isn't already there
-    for key, value in param_dict.items():
-        if not key in params_dict_with_units.keys():
-            params_dict_with_units[key] = value
-
-    return params_dict_with_units
-
-
-def build_virtual_bond(psf, param_dict_with_units):
-    vbond_selections = param_dict_with_units.get('virtual_bond')
+def build_virtual_bond(psf, params):
+    vbond_selections = params.virtual_bond
     print(vbond_selections)
     topology = mdtraj.Topology.from_openmm(psf.topology)
     print(topology)
@@ -99,13 +80,13 @@ def build_virtual_bond(psf, param_dict_with_units):
     return force
 
 
-def get_platform_from_params(param_dict_with_units):
-    platform_name = param_dict_with_units['platform']
+def get_platform_from_params(params):
+    platform_name = params.platform
     platform = openmm.Platform.getPlatformByName(platform_name)
 
     if not platform_name == 'CPU':
-        print(f"Setting precision to {param_dict_with_units['precision']}")
-        platform.setPropertyDefaultValue('Precision', param_dict_with_units['precision'])
+        print(f"Setting precision to {params.precision}")
+        platform.setPropertyDefaultValue('Precision', params.precision)
         print(f"Setting DeterministicForces to 'true`")
         platform.setPropertyDefaultValue('DeterministicForces', 'true')
 

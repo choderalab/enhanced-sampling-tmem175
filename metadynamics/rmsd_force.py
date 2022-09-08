@@ -38,22 +38,22 @@ def main():
     psf = input_dict["psf"]
     print(psf.topology)
 
-    param_dict_with_units = sb.load_simulation_params(args.params_file)
-    print(param_dict_with_units)
+    params = sb.SimParams(args.params_file)
+    print(params)
 
     system = psf.createSystem(input_dict["params"],
-                              nonbondedMethod=param_dict_with_units['nonbonded_method'],
-                              constraints=param_dict_with_units['constraints'],
+                              nonbondedMethod=params.nonbonded_method,
+                              constraints=params.constraints,
                               removeCMMotion=False,
-                              hydrogenMass=param_dict_with_units['hydrogen_mass'])
+                              hydrogenMass=params.hydrogen_mass)
 
-    integrator = openmm.LangevinMiddleIntegrator(param_dict_with_units['temperature'],
-                                                 param_dict_with_units['friction'],
-                                                 param_dict_with_units['time_step'])
+    integrator = openmm.LangevinMiddleIntegrator(params.temperature,
+                                                 params.friction,
+                                                 params.time_step)
 
-    barostat = openmm.MonteCarloMembraneBarostat(param_dict_with_units['pressure'],
-                                                 param_dict_with_units['surface_tension'],
-                                                 param_dict_with_units['temperature'],
+    barostat = openmm.MonteCarloMembraneBarostat(params.pressure,
+                                                 params.surface_tension,
+                                                 params.temperature,
                                                  openmm.MonteCarloMembraneBarostat.XYIsotropic,
                                                  openmm.MonteCarloMembraneBarostat.ZFree
                                                  )
@@ -64,11 +64,11 @@ def main():
 
     system.addForce(barostat)
 
-    vbond_force = sb.build_virtual_bond(psf, param_dict_with_units)
+    vbond_force = sb.build_virtual_bond(psf, params)
 
     system.addForce(vbond_force)
 
-    platform = sb.get_platform_from_params(param_dict_with_units)
+    platform = sb.get_platform_from_params(params)
 
     ref_dict = sb.load_input_dir(args.reference_dir)
     ref_psf = ref_dict['psf']
@@ -89,11 +89,11 @@ def main():
 
     meta = openmm.app.Metadynamics(system=system,
                                    variables=[rmsd_bias],
-                                   temperature=param_dict_with_units['temperature'],
-                                   biasFactor=2,
+                                   temperature=params.temperature,
+                                   biasFactor=5,
                                    height=1,
                                    frequency=1,
-                                   saveFrequency=1,
+                                   saveFrequency=10,
                                    biasDir=args.output_dir
                                    )
 
@@ -113,13 +113,13 @@ def main():
         )
     )
     print("Running simulation")
-    meta.step(sim, param_dict_with_units["nsteps"])
+    meta.step(sim, params.nsteps)
     print(meta.getCollectiveVariables(sim))
 
     sim.reporters.append(
         openmm.app.StateDataReporter(
             os.path.join(args.output_dir, "simulation_log.txt"),
-            reportInterval=param_dict_with_units["report_freq"],
+            reportInterval=params.report_freq,
             step=True,
             time=True,
             potentialEnergy=True,
@@ -128,7 +128,7 @@ def main():
             speed=True,
             progress=True,
             remainingTime=True,
-            totalSteps=param_dict_with_units["nsteps"],
+            totalSteps=params.nsteps,
             separator="\t",
         )
     )

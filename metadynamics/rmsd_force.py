@@ -104,8 +104,22 @@ def main():
     sim.context.setPositions(cif.positions)
     sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
     # print(meta.getCollectiveVariables(sim))
-    print("Minimizing energy")
+    ## Run minimization
+    print(
+        "  initial : %8.3f kcal/mol"
+        % (
+                sim.context.getState(getEnergy=True).getPotentialEnergy()
+                / openmm.unit.kilocalories_per_mole
+        )
+    )
     sim.minimizeEnergy()
+    print(
+        "  final : %8.3f kcal/mol"
+        % (
+                sim.context.getState(getEnergy=True).getPotentialEnergy()
+                / openmm.unit.kilocalories_per_mole
+        )
+    )
     # meta.step(sim, 10)
     print("Running simulation")
     sim.step(10)

@@ -71,6 +71,8 @@ def main():
     sim.context.setPositions(input_dict['cif'].positions)
     sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
 
+    sim.step(10)
+
     ss.write_simulation_files(sim, args.output_dir)
 
 

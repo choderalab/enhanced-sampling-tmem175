@@ -1,0 +1,7 @@
+climber_path: /Users/alexpayne/Scientific_Packages/Climber
+align_path: sh/rms.sh
+pdb_list:
+  - systems/system00/protein.pdb
+  - systems/system01/protein.pdb
+morph_path: sh/morphx.sh
+morph_steps: 50

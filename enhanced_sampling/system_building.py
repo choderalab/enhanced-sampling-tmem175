@@ -12,6 +12,7 @@ def load_input_dir(input_dir, charmm_param_dir=None):
     print(f"Loading psf from {psf_path}")
     psf = CharmmPsfFile(psf_path)
     if charmm_param_dir:
+        print(f"Loading Charmm params from {charmm_param_dir}")
         param_paths = [os.path.join(charmm_param_dir, path) for path in os.listdir(charmm_param_dir)]
         params = CharmmParameterSet(*param_paths)
     else:
@@ -77,7 +78,9 @@ def get_platform_from_params(param_dict_with_units):
     platform = openmm.Platform.getPlatformByName(platform_name)
 
     if not platform_name == 'CPU':
+        print(f"Setting precision to {param_dict_with_units['precision']}")
         platform.setPropertyDefaultValue('Precision', param_dict_with_units['precision'])
+        print(f"Setting DeterministicForces to 'true`")
         platform.setPropertyDefaultValue('DeterministicForces', 'true')
 
     return platform

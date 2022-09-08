@@ -63,9 +63,9 @@ def main():
     ## the default is 25 timesteps, i've set it for 50
     system.addForce(barostat)
 
-    vbond_force = sb.build_virtual_bond(psf, param_dict_with_units)
+    # vbond_force = sb.build_virtual_bond(psf, param_dict_with_units)
 
-    system.addForce(vbond_force)
+    # system.addForce(vbond_force)
 
     platform = sb.get_platform_from_params(param_dict_with_units)
 
@@ -104,13 +104,29 @@ def main():
     sim.context.setPositions(cif.positions)
     sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
     # print(meta.getCollectiveVariables(sim))
-    # print("Minimizing energy")
-    # sim.minimizeEnergy()
+    print("Minimizing energy")
+    sim.minimizeEnergy()
     # meta.step(sim, 10)
     print("Running simulation")
     sim.step(10)
     # print(meta.getCollectiveVariables(sim))
 
+    sim.reporters.append(
+        openmm.app.StateDataReporter(
+            os.path.join(args.output_dir, "simulation_log.txt"),
+            reportInterval=1,
+            step=True,
+            time=True,
+            potentialEnergy=True,
+            kineticEnergy=True,
+            temperature=True,
+            speed=True,
+            progress=True,
+            remainingTime=True,
+            totalSteps=10,
+            separator="\t",
+        )
+    )
     print(f"Writing simulation files to {args.output_dir}")
     ss.write_simulation_files(sim, args.output_dir)
 

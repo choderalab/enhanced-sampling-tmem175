@@ -1,7 +1,7 @@
 ## IMPORTS
 from argparse import ArgumentParser
 import os, sys
-import openmm as mm
+import openmm
 import openmm.app
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
@@ -38,8 +38,6 @@ def main():
     psf = input_dict["psf"]
     print(psf.topology)
 
-    cif = input_dict['cif']
-
     param_dict_with_units = sb.load_simulation_params(args.params_file)
     print(param_dict_with_units)
 
@@ -49,15 +47,15 @@ def main():
                               removeCMMotion=False,
                               hydrogenMass=param_dict_with_units['hydrogen_mass'])
 
-    integrator = mm.LangevinMiddleIntegrator(param_dict_with_units['temperature'],
+    integrator = openmm.LangevinMiddleIntegrator(param_dict_with_units['temperature'],
                                              param_dict_with_units['friction'],
                                              param_dict_with_units['time_step'])
 
-    barostat = mm.MonteCarloMembraneBarostat(param_dict_with_units['pressure'],
+    barostat = openmm.MonteCarloMembraneBarostat(param_dict_with_units['pressure'],
                                              param_dict_with_units['surface_tension'],
                                              param_dict_with_units['temperature'],
-                                             mm.MonteCarloMembraneBarostat.XYIsotropic,
-                                             mm.MonteCarloMembraneBarostat.ZFree
+                                             openmm.MonteCarloMembraneBarostat.XYIsotropic,
+                                             openmm.MonteCarloMembraneBarostat.ZFree
                                              )
     barostat.setFrequency(50)  ## for some reason the __init__ won't accept it as an argument, but this works
     ## the default is 25 timesteps, i've set it for 50
@@ -100,21 +98,14 @@ def main():
                                 system=system,
                                 integrator=integrator,
                                 platform=platform)
+    sim.context.setState(input_dict["state"])
 
-    sim.context.setPositions(cif.positions)
-    sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
+    # sim.context.setPositions(input_dict["positions"])
+    # sim.context.setVelocitiesToTemperature(param_dict_with_units['temperature'])
     # print(meta.getCollectiveVariables(sim))
     ## Run minimization
     print(
         "  initial : %8.3f kcal/mol"
-        % (
-                sim.context.getState(getEnergy=True).getPotentialEnergy()
-                / openmm.unit.kilocalories_per_mole
-        )
-    )
-    sim.minimizeEnergy()
-    print(
-        "  final : %8.3f kcal/mol"
         % (
                 sim.context.getState(getEnergy=True).getPotentialEnergy()
                 / openmm.unit.kilocalories_per_mole

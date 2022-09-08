@@ -27,7 +27,9 @@ def load_input_dir(input_dir,
     x, y, z = state.getPeriodicBoxVectors()
     psf.setBox(x[0], y[1], z[2])
 
-    return {"psf": psf, "params": params, "state": state}
+    positions = state.getPositions()
+
+    return {"psf": psf, "params": params, "state": state, "positions": positions}
 
 
 def load_xyz_from_datfile(dat_file_path):

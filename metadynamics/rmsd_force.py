@@ -1,7 +1,7 @@
 ## IMPORTS
 from argparse import ArgumentParser
 import os, sys
-import openmm
+import openmm, mdtraj
 import openmm.app
 import logging
 
@@ -39,7 +39,6 @@ def main():
     sys.stdout.write = logger.info
 
     utils.print_args(args)
-
 
     input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir)
     print(input_dict.keys())
@@ -123,7 +122,7 @@ def main():
 
     sim.reporters.append(
         openmm.app.StateDataReporter(
-            os.path.join(output_dir, "simulation_log.txt"),
+            os.path.join(output_dir, "trajectory.log"),
             reportInterval=params.report_freq,
             step=True,
             time=True,
@@ -138,6 +137,19 @@ def main():
         )
     )
 
+    sim.reporters.append(openmm.app.CheckpointReporter(
+        file=os.path.join(output_dir, "trajectory.chk"),
+        reportInterval=params.chk_freq
+    )
+    )
+
+    # Write out the trajectory
+    sim.reporters.append(mdtraj.reporters.XTCReporter(
+        file=os.path.join(output_dir, "trajectory.xtc"),
+        reportInterval=params.traj_freq
+    )
+    )
+
     print("Running simulation")
     meta.step(sim, params.nsteps)
     print(meta.getCollectiveVariables(sim))
@@ -150,7 +162,6 @@ def main():
     utils.write_to_log(args,
                        os.path.basename(__file__))
 
-
-## RUN COMMAND
-if __name__ == "__main__":
-    main()
+    ## RUN COMMAND
+    if __name__ == "__main__":
+        main()

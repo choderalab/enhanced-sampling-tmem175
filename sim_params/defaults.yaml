@@ -9,7 +9,7 @@ surface_tension: 0  # units are complicated
 nonbonded_method: "PME"
 constraints: "HBonds"
 
-nsteps: 500000 # 1 ns, 1*10^6 fs
+nsteps: 50000000 # 100 ns, 1*10^6 fs
 report_freq: 50000 # every 0.1  ns
 chk_freq: 250000 # every 0.5 ns
 traj_freq: 5000  # 100 frames, 1ns at 4fs / step

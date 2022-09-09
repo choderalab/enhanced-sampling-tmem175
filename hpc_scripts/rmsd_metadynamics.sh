@@ -8,7 +8,7 @@
 #BSUB -o  %J.out
 
 # Set error file
-#BSUB -eo %J.stderr
+#BSUB -e %J.stderr
 
 # Specify node group
 #BSUB -m "lu-gpu lv-gpu ld-gpu lt-gpu lg-gpu boson"

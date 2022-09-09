@@ -54,6 +54,7 @@ class SimParams():
 
         ## Parameters without units
         self.surface_tension = param_dict['surface_tension']
+        self.nsteps = param_dict["nsteps"]
         self.report_freq = param_dict["report_freq"]
         self.chk_freq = param_dict["chk_freq"]
         self.traj_freq = param_dict["traj_freq"]

@@ -162,6 +162,6 @@ def main():
     utils.write_to_log(args,
                        os.path.basename(__file__))
 
-    ## RUN COMMAND
-    if __name__ == "__main__":
-        main()
+## RUN COMMAND
+if __name__ == "__main__":
+    main()

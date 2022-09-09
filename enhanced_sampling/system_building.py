@@ -45,21 +45,27 @@ class SimParams():
         with open(param_file) as f:
             param_dict = yaml.safe_load(f)
 
-        params_dict_with_units = {}
+        ## Parameters with units
         self.hydrogen_mass = param_dict['hydrogen_mass'] * unit.amu
         self.temperature = param_dict['temperature'] * unit.kelvin
         self.friction = param_dict['friction'] / unit.picoseconds
         self.time_step = param_dict['time_step'] * unit.picoseconds
         self.pressure = param_dict['pressure'] * unit.bar
-        self.surface_tension = param_dict['surface_tension']
 
+        ## Parameters without units
+        self.surface_tension = param_dict['surface_tension']
+        self.report_freq = param_dict["report_freq"]
+        self.chk_freq = param_dict["chk_freq"]
+        self.traj_freq = param_dict["traj_freq"]
+
+        ## Not required parameters
+        self.virtual_bond = param_dict.get("virtual_bond")
+        self.platform = param_dict.get("platform")
+        self.precision = param_dict.get("mixed")
+
+        ## Parameters that are actually objects
         self.nonbonded_method = getattr(openmm.app, param_dict['nonbonded_method'])
         self.constraints = getattr(openmm.app, param_dict['constraints'])
-
-        ## add everything else to the that isn't already there
-        for key, value in param_dict.items():
-            if not getattr(self, key, False):
-                self.__setattr__(key, value)
 
     def __str__(self):
         repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]

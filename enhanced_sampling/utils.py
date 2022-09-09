@@ -26,6 +26,16 @@ def prep_output_dir(output_dir):
         os.mkdir(output_dir)
     assert os.path.exists(output_dir)
 
+    idx = 0
+    sim_output_dir_name = f"sim{idx:02d}"
+    while sim_output_dir_name in os.listdir(output_dir):
+        idx += 1
+        sim_output_dir_name = f"sim{idx:02d}"
+
+    sim_output_dir = os.path.join(output_dir, sim_output_dir_name)
+    os.mkdir(sim_output_dir)
+    return sim_output_dir
+
 
 def load_yaml(file_path):
     file_path = os.path.join(file_path)

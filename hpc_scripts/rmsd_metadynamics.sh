@@ -20,4 +20,4 @@
 #BSUB -J "rmsd_metadynamics"
 source ~/.bashrc
 conda activate enhanced-sampling-tmem175
-python ../metadynamics/rmsd_force.py
+python ../metadynamics/rmsd_force.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/

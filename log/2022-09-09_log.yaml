@@ -1,0 +1,30 @@
+'2022-09-09T15:01:43.069816':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    output_dir: /Users/alexpayne/Scientific_Projects/local_test/enhanced_sampling/metadynamics_rmsd
+    params_file: ../sim_params/local_test.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: rmsd_force.py
+  success: ''
+'2022-09-09T15:05:37.581705':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    output_dir: /Users/alexpayne/Scientific_Projects/local_test/enhanced_sampling/metadynamics_rmsd
+    params_file: ../sim_params/local_test.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: rmsd_force.py
+  success: ''
+'2022-09-09T15:08:17.813842':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    output_dir: /Users/alexpayne/Scientific_Projects/local_test/enhanced_sampling/metadynamics_rmsd
+    params_file: ../sim_params/local_test.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: rmsd_force.py
+  success: ''

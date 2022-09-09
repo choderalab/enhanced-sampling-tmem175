@@ -3,6 +3,7 @@ from argparse import ArgumentParser
 import os, sys
 import openmm
 import openmm.app
+import logging
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
@@ -29,10 +30,17 @@ def get_args():
 ## MAIN SCRIPT
 def main():
     args = get_args()
+    output_dir = utils.prep_output_dir(args.output_dir)
+
+    logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+    logger = logging.getLogger()
+    logger.addHandler(logging.FileHandler(os.path.join(output_dir, "log.txt"), 'a'))
+    # sys.stderr.write = logger.error
+    sys.stdout.write = logger.info
 
     utils.print_args(args)
 
-    utils.prep_output_dir(args.output_dir)
+
     input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir)
     print(input_dict.keys())
     psf = input_dict["psf"]
@@ -94,7 +102,7 @@ def main():
                                    height=1,
                                    frequency=1,
                                    saveFrequency=10,
-                                   biasDir=args.output_dir
+                                   biasDir=output_dir
                                    )
 
     sim = openmm.app.Simulation(psf.topology,
@@ -112,13 +120,10 @@ def main():
                 / openmm.unit.kilocalories_per_mole
         )
     )
-    print("Running simulation")
-    meta.step(sim, params.nsteps)
-    print(meta.getCollectiveVariables(sim))
 
     sim.reporters.append(
         openmm.app.StateDataReporter(
-            os.path.join(args.output_dir, "simulation_log.txt"),
+            os.path.join(output_dir, "simulation_log.txt"),
             reportInterval=params.report_freq,
             step=True,
             time=True,
@@ -132,8 +137,13 @@ def main():
             separator="\t",
         )
     )
-    print(f"Writing simulation files to {args.output_dir}")
-    ss.write_simulation_files(sim, args.output_dir)
+
+    print("Running simulation")
+    meta.step(sim, params.nsteps)
+    print(meta.getCollectiveVariables(sim))
+
+    print(f"Writing simulation files to {output_dir}")
+    ss.write_simulation_files(sim, output_dir)
 
     print("Script cleanup")
     utils.save_env()

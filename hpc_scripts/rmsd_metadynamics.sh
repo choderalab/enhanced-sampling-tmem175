@@ -11,7 +11,6 @@
 #BSUB -e %J.stderr
 
 # Specify node group
-#BSUB -m "lu-gpu lv-gpu ld-gpu lt-gpu lg-gpu boson"
 #BSUB -q gpuqueue
 
 # nodes: number of nodes and GPU request

@@ -62,7 +62,7 @@ class SimParams():
         ## Not required parameters
         self.virtual_bond = param_dict.get("virtual_bond")
         self.platform = param_dict.get("platform")
-        self.precision = param_dict.get("mixed")
+        self.precision = param_dict.get("precision")
 
         ## Parameters that are actually objects
         self.nonbonded_method = getattr(openmm.app, param_dict['nonbonded_method'])

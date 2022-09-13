@@ -15,6 +15,8 @@ def load_input_dir(input_dir,
         psf_path = os.path.join(input_dir, "step5_input.psf")
         print(f"Loading psf from {psf_path}")
         psf = CharmmPsfFile(psf_path)
+    else:
+        psf = None
 
     if charmm_param_dir:
         print(f"Loading Charmm params from {charmm_param_dir}")

@@ -150,8 +150,7 @@ def main():
     )
     )
     sim.reporters.append(reporters.MetadynamicsReporter(
-        free_energy_file=os.path.join(output_dir, "free_energies.npz"),
-        collective_variable_file=os.path.join(output_dir, "collective_variables.log"),
+        collective_variable_file=os.path.join(output_dir, "collective_variables.txt"),
         reportInterval=1,
         meta=meta
     ))

@@ -4,14 +4,12 @@ import numpy
 
 
 class MetadynamicsReporter():
-    def __init__(self, free_energy_file, collective_variable_file, reportInterval, meta):
-        self._free_energy_file = open(free_energy_file, 'w')
+    def __init__(self, collective_variable_file, reportInterval, meta):
         self._collective_variable_file = open(collective_variable_file, 'w')
         self._reportInterval = reportInterval
         self._meta = meta
 
     def __del__(self):
-        self._free_energy_file.close()
         self._collective_variable_file.close()
 
     def describeNextReport(self, simulation):
@@ -40,13 +38,9 @@ class MetadynamicsReporter():
         return (steps, False, False, False, False, None)
 
     def report(self, simulation, state):
-        # free_energy = self._meta.getFreeEnergy()
-        # self._free_energy_file.write(free_energy)
-
         collective_variables = self._meta.getCollectiveVariables(simulation)
         cv_list = [str(cv) for cv in collective_variables]
         cv_str = ", ".join(cv_list)
-        # numpy.savez(self._collective_variable_file, collective_variables)
         self._collective_variable_file.write(f"{cv_str}\n")
 
 def save_free_energies(output_dir, meta):

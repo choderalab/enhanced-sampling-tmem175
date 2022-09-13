@@ -1,4 +1,6 @@
 import openmm
+import os
+import numpy
 
 
 class MetadynamicsReporter():
@@ -45,3 +47,8 @@ class MetadynamicsReporter():
         cv_list = [str(cv) for cv in collective_variables]
         cv_str = ", ".join(cv_list)
         self._collective_variable_file.write(f"{cv_str}\n")
+
+def save_free_energies(output_dir, meta):
+    print("Writing final free energies")
+    with open(os.path.join(output_dir, "free_energies.npy"), "wb") as f:
+        numpy.save(f, meta.getFreeEnergy())

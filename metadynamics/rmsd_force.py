@@ -5,11 +5,9 @@ import openmm, mdtraj
 import openmm.app
 import logging
 
-import enhanced_sampling.reporters
-
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb, system_saving as ss
+from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters
 
 
 ## ARGUMENT PARSING
@@ -151,7 +149,7 @@ def main():
         reportInterval=params.traj_freq
     )
     )
-    sim.reporters.append(enhanced_sampling.reporters.MetadynamicsReporter(
+    sim.reporters.append(reporters.MetadynamicsReporter(
         free_energy_file=os.path.join(output_dir, "free_energies.log"),
         collective_variable_file=os.path.join(output_dir, "collective_variables.log"),
         reportInterval=1,
@@ -160,11 +158,8 @@ def main():
 
     print("Running simulation")
     meta.step(sim, params.nsteps)
-    print(meta.getCollectiveVariables(sim))
 
-    print("Writing final free energies")
-    with open(os.path.join(output_dir, "free_energies.log"), "w") as f:
-        f.write(f"{meta.getFreeEnergy()}")
+    reporters.save_free_energies(output_dir, meta)
 
 
     print(f"Writing simulation files to {output_dir}")

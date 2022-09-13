@@ -5,9 +5,11 @@ import openmm, mdtraj
 import openmm.app
 import logging
 
+import yaml
+
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters
+from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building
 
 
 ## ARGUMENT PARSING
@@ -23,6 +25,8 @@ def get_args():
                         help="Directory containing charmm parameter files")
     parser.add_argument("-p", "--params_file", type=str, default="../sim_params/defaults.yaml",
                         help="YAML file containing simulation running values")
+    parser.add_argument('-y', "--meta_params", type=str, default=None,
+                        help="Path to yaml file containing residue list and min_max values")
     args = parser.parse_args()
     return args
 
@@ -83,15 +87,28 @@ def main():
 
     assert len(ref_positions) == len(input_dict["positions"])
 
-    idx = [atom.index for atom in ref_psf.topology.atoms() if
-           atom.residue.chain.index == 0 or atom.residue.chain.index == 1]
+    if args.meta_params:
+        assert os.path.exists(args.meta_params)
+        with open(args.meta_params, "r") as f:
+            meta_dict = yaml.safe_load(f)
+        res_list = meta_dict.get('res_list')
+        rmsd_sel = meta_dict.get('selection')
+        min_value = meta_dict.get('min_value')
+        max_value = meta_dict.get('max_value')
+        bias_width = meta_dict.get('bias_width')
+    else:
+        min_value = 0.01
+        max_value = 0.4
+        rmsd_sel = 'protein_ca'
+
+    idx = cv_building.get_openmm_idx(ref_psf.topology, rmsd_sel, res_list)
 
     rmsd_force = openmm.RMSDForce(ref_positions, idx)
 
     rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-                                                     minValue=0.01,
-                                                     maxValue=0.4,
-                                                     biasWidth=0.02,
+                                                     minValue=min_value,
+                                                     maxValue=max_value,
+                                                     biasWidth=bias_width,
                                                      periodic=False)
 
     meta = openmm.app.Metadynamics(system=system,

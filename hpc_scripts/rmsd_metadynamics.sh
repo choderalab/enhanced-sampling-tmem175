@@ -20,4 +20,5 @@
 
 source ~/.bashrc
 conda activate enhanced-sampling-tmem175
-python ../metadynamics/rmsd_force.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/rmsd_metadynamics
+python ../metadynamics/rmsd_force.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/rmsd_metadynamics -y ../metadynamics/tic1_0.7.yaml
+#python ../metadynamics/rmsd_force.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/rmsd_metadynamics -y ../metadynamics/cas.yaml

@@ -1,5 +1,4 @@
-import openmm, openmmtools
-import mdtraj
+import openmm
 
 # def create_rmsd_restraint(positions, atom_indicies):
 #     rmsd_cv = openmm.RMSDForce(positions, atom_indicies)

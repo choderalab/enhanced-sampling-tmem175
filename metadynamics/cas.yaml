@@ -1,0 +1,4 @@
+selection: protein_ca
+min_value: 0.1
+max_value: 3.0
+bias_width: 0.02

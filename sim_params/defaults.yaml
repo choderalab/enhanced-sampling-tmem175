@@ -9,10 +9,10 @@ surface_tension: 0  # units are complicated
 nonbonded_method: "PME"
 constraints: "HBonds"
 
-nsteps: 50000000 # 100 ns, 1*10^5 ps
+nsteps: 50000000 # 10 ns, 1*10^5 ps
 report_freq: 50000 # every 100  ps
 chk_freq: 250000 # every 500 ps
-traj_freq: 5000  # every 10 ps (1000 frames)
+traj_freq: 50000  # every 10 ps (100 frames)
 
 virtual_bond:
   - resSeq 46 and name CA and chainid 0   # mdtraj selection syntax

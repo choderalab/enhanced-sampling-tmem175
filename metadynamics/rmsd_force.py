@@ -101,7 +101,7 @@ def main():
         max_value = 0.4
         rmsd_sel = 'protein_ca'
 
-    idx = cv_building.get_openmm_idx(ref_psf.topology, rmsd_sel, res_list)
+    idx = cv_building.get_openmm_idx(psf.topology, rmsd_sel, res_list)
 
     rmsd_force = openmm.RMSDForce(ref_positions, idx)
 
@@ -168,7 +168,7 @@ def main():
     )
     sim.reporters.append(reporters.MetadynamicsReporter(
         collective_variable_file=os.path.join(output_dir, "collective_variables.txt"),
-        reportInterval=1,
+        reportInterval=params.traj_freq,
         meta=meta
     ))
 

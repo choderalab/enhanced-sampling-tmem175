@@ -5,13 +5,16 @@ from simtk import unit
 
 def load_input_dir(input_dir,
                    charmm_param_dir=None,
-                   from_state=True):
+                   load_psf=True,
+                   from_state=True
+                   ):
     assert os.path.exists(input_dir)
 
     ## load psf
-    psf_path = os.path.join(input_dir, "step5_input.psf")
-    print(f"Loading psf from {psf_path}")
-    psf = CharmmPsfFile(psf_path)
+    if load_psf:
+        psf_path = os.path.join(input_dir, "step5_input.psf")
+        print(f"Loading psf from {psf_path}")
+        psf = CharmmPsfFile(psf_path)
 
     if charmm_param_dir:
         print(f"Loading Charmm params from {charmm_param_dir}")
@@ -20,14 +23,19 @@ def load_input_dir(input_dir,
     else:
         params = None
 
-    input_state_path = os.path.join(input_dir, "state.xml.bz2")
-    with bz2.open(input_state_path, 'rb') as infile:
-        state = openmm.XmlSerializer.deserialize(infile.read().decode())
+    if from_state:
+        input_state_path = os.path.join(input_dir, "state.xml.bz2")
+        with bz2.open(input_state_path, 'rb') as infile:
+            state = openmm.XmlSerializer.deserialize(infile.read().decode())
 
-    x, y, z = state.getPeriodicBoxVectors()
-    psf.setBox(x[0], y[1], z[2])
+        if load_psf:
+            x, y, z = state.getPeriodicBoxVectors()
+            psf.setBox(x[0], y[1], z[2])
 
-    positions = state.getPositions()
+        positions = state.getPositions()
+    else:
+        state = None
+        positions = None
 
     return {"psf": psf, "params": params, "state": state, "positions": positions}
 

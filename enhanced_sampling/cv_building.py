@@ -19,6 +19,7 @@ def get_openmm_idx(topology: openmm.app.topology.Topology, selection, res_list=F
     :param res_list:
     :return:
     """
+    print(f"Using protein selection: {selection} and res_list: {res_list}")
     if selection == "protein":
         idx = [atom.index for atom in topology.atoms() if
                atom.residue.chain.index == 0 or atom.residue.chain.index == 1]

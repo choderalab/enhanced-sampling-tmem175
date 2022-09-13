@@ -81,7 +81,7 @@ def main():
 
     platform = sb.get_platform_from_params(params)
 
-    ref_dict = sb.load_input_dir(args.reference_dir)
+    ref_dict = sb.load_input_dir(args.reference_dir, load_psf=False)
     ref_psf = ref_dict['psf']
     ref_positions = ref_dict['positions']
 

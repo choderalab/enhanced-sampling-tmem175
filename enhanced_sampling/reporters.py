@@ -46,6 +46,7 @@ class MetadynamicsReporter():
         collective_variables = self._meta.getCollectiveVariables(simulation)
         cv_list = [str(cv) for cv in collective_variables]
         cv_str = ", ".join(cv_list)
+        # numpy.savez(self._collective_variable_file, collective_variables)
         self._collective_variable_file.write(f"{cv_str}\n")
 
 def save_free_energies(output_dir, meta):

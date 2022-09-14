@@ -149,7 +149,7 @@ def main():
             speed=True,
             progress=True,
             remainingTime=True,
-            totalSteps=params.nsteps,
+            totalSteps=params.n_steps,
             separator="\t",
         )
     )
@@ -173,7 +173,7 @@ def main():
     ))
 
     print("Running simulation")
-    meta.step(sim, params.nsteps)
+    meta.step(sim, params.n_steps)
 
     reporters.save_free_energies(output_dir, meta)
 

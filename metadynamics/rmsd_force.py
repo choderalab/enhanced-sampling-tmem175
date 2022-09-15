@@ -101,25 +101,36 @@ def main():
         max_value = 0.4
         rmsd_sel = 'protein_ca'
 
-    idx = cv_building.get_openmm_idx(psf.topology, rmsd_sel, res_list)
+    ## Add restraint force
+    restraint_idx = cv_building.get_openmm_idx(psf.topology, "protein_heavy")
+    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=ref_positions,
+                                                             atom_indicies=restraint_idx,
+                                                             spring_constant=1000,
+                                                             rmsd_max=0.2
+                                                             )
+    force_group = 9
+    rmsd_restraint_force.setForceGroup(force_group)
+    restraint_force_idx = system.addForce(rmsd_restraint_force)
 
-    rmsd_force = openmm.RMSDForce(ref_positions, idx)
-
-    rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-                                                     minValue=min_value,
-                                                     maxValue=max_value,
-                                                     biasWidth=bias_width,
-                                                     periodic=False)
-
-    meta = openmm.app.Metadynamics(system=system,
-                                   variables=[rmsd_bias],
-                                   temperature=params.temperature,
-                                   biasFactor=5,
-                                   height=1,
-                                   frequency=1,
-                                   saveFrequency=10,
-                                   biasDir=output_dir
-                                   )
+    # idx = cv_building.get_openmm_idx(psf.topology, rmsd_sel, res_list)
+    #
+    # rmsd_force = openmm.RMSDForce(ref_positions, idx)
+    #
+    # rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
+    #                                                  minValue=min_value,
+    #                                                  maxValue=max_value,
+    #                                                  biasWidth=bias_width,
+    #                                                  periodic=False)
+    #
+    # meta = openmm.app.Metadynamics(system=system,
+    #                                variables=[rmsd_bias],
+    #                                temperature=params.temperature,
+    #                                biasFactor=5,
+    #                                height=1,
+    #                                frequency=1,
+    #                                saveFrequency=10,
+    #                                biasDir=output_dir
+    #                                )
 
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,
@@ -127,7 +138,7 @@ def main():
                                 platform=platform)
     sim.context.setState(input_dict["state"])
 
-    print(meta.getCollectiveVariables(sim))
+    # print("Collective Variable:\t", meta.getCollectiveVariables(sim))
 
     print(
         "  initial : %8.3f kcal/mol"
@@ -137,59 +148,60 @@ def main():
         )
     )
 
-    sim.reporters.append(
-        openmm.app.StateDataReporter(
-            os.path.join(output_dir, "trajectory.log"),
-            reportInterval=params.report_freq,
-            step=True,
-            time=True,
-            potentialEnergy=True,
-            kineticEnergy=True,
-            temperature=True,
-            speed=True,
-            progress=True,
-            remainingTime=True,
-            totalSteps=params.n_steps,
-            separator="\t",
-        )
-    )
+    # sim.reporters.append(
+    #     openmm.app.StateDataReporter(
+    #         os.path.join(output_dir, "trajectory.log"),
+    #         reportInterval=params.report_freq,
+    #         step=True,
+    #         time=True,
+    #         potentialEnergy=True,
+    #         kineticEnergy=True,
+    #         temperature=True,
+    #         speed=True,
+    #         progress=True,
+    #         remainingTime=True,
+    #         totalSteps=params.n_steps,
+    #         separator="\t",
+    #     )
+    # )
 
-    sim.reporters.append(openmm.app.CheckpointReporter(
-        file=os.path.join(output_dir, "trajectory.chk"),
-        reportInterval=params.chk_freq
-    )
-    )
+    # sim.reporters.append(openmm.app.CheckpointReporter(
+    #     file=os.path.join(output_dir, "trajectory.chk"),
+    #     reportInterval=params.chk_freq
+    # )
+    # )
+    #
+    # # Write out the trajectory
+    # sim.reporters.append(mdtraj.reporters.XTCReporter(
+    #     file=os.path.join(output_dir, "trajectory.xtc"),
+    #     reportInterval=params.traj_freq
+    # )
+    # )
+    # sim.reporters.append(reporters.MetadynamicsReporter(
+    #     collective_variable_file=os.path.join(output_dir, "collective_variables.txt"),
+    #     reportInterval=params.traj_freq,
+    #     meta=meta
+    # ))
 
-    # Write out the trajectory
-    sim.reporters.append(mdtraj.reporters.XTCReporter(
-        file=os.path.join(output_dir, "trajectory.xtc"),
-        reportInterval=params.traj_freq
-    )
-    )
-    sim.reporters.append(reporters.MetadynamicsReporter(
-        collective_variable_file=os.path.join(output_dir, "collective_variables.txt"),
+    sim.reporters.append(reporters.CustomCVForceReporter(
+        file=os.path.join(output_dir, "forces.txt"),
         reportInterval=params.traj_freq,
-        meta=meta
-    ))
-
-    sim.reporters.append(reporters.ForceReporter(
-        file="forces.txt",
-        reportInterval=params.traj_freq,
+        force_group=force_group
     ))
 
     print("Running simulation")
-    meta.step(sim, params.n_steps)
+    # meta.step(sim, params.n_steps)
+    sim.step(params.n_steps)
 
-    reporters.save_free_energies(output_dir, meta)
-
-
-    print(f"Writing simulation files to {output_dir}")
-    ss.write_simulation_files(sim, output_dir)
-
-    print("Script cleanup")
-    utils.save_env()
-    utils.write_to_log(args,
-                       os.path.basename(__file__))
+    # reporters.save_free_energies(output_dir, meta)
+    #
+    # print(f"Writing simulation files to {output_dir}")
+    # ss.write_simulation_files(sim, output_dir)
+    #
+    # print("Script cleanup")
+    # utils.save_env()
+    # utils.write_to_log(args,
+    #                    os.path.basename(__file__))
 
 ## RUN COMMAND
 if __name__ == "__main__":

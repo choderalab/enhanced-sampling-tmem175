@@ -50,10 +50,11 @@ class CustomCVForceReporter(object):
     04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
     """
 
-    def __init__(self, file, reportInterval, force_group):
+    def __init__(self, file, reportInterval, force_group, force_idx):
         self._out = open(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
+        self._force_idx = force_idx
         self.write_header()
 
     def __del__(self):
@@ -67,8 +68,14 @@ class CustomCVForceReporter(object):
         state = simulation.context.getState(getForces=True,
                                             getEnergy=True,
                                             groups=self._force_group)
-        header_list = [state.getPotentialEnergy().format('%.2f')]
-        self._out.write(self.get_formated_str(header_list))
+        system = simulation.context.getSystem()
+        force = system.getForce(self._force_idx)
+
+        out_list = [state.getPotentialEnergy().format('%.2f'),
+                       str(force.getCollectiveVariableValues(simulation.context)),
+                       str(state.getForces().value_in_unit(unit.kilojoules/unit.mole/unit.nanometer)[0])
+                       ]
+        self._out.write(self.get_formated_str(out_list))
 
     def get_formated_str(self, out_list):
         formated_list = [f"{item:30}" for item in out_list]
@@ -76,7 +83,7 @@ class CustomCVForceReporter(object):
         return out_str
 
     def write_header(self):
-        header_list = ["Potential Energy"]
+        header_list = ["Potential Energy", "CustomCV", "Forces"]
         self._out.write(self.get_formated_str(header_list))
 
 

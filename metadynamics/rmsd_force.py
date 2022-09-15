@@ -103,7 +103,7 @@ def main():
 
     ## Add restraint force
     restraint_idx = cv_building.get_openmm_idx(psf.topology, "protein_heavy")
-    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=ref_positions,
+    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=input_dict["positions"],
                                                              atom_indicies=restraint_idx,
                                                              spring_constant=1000,
                                                              rmsd_max=0.4
@@ -183,15 +183,26 @@ def main():
     #     meta=meta
     # ))
 
+    system = sim.context.getSystem()
+    for f in system.getForces():
+        print(f.getName(), f.getForceGroup())
+
+    state = sim.context.getState(getForces=True,
+                                 getEnergy=True,
+                                 groups=force_group)
+    print(state.getPotentialEnerg())
+
     sim.reporters.append(reporters.CustomCVForceReporter(
         file=os.path.join(output_dir, "forces.txt"),
         reportInterval=params.traj_freq,
-        force_group=force_group
+        force_group=force_group,
+        force_idx=restraint_force_idx
     ))
 
     print("Running simulation")
     # meta.step(sim, params.n_steps)
     sim.step(params.n_steps)
+    print(state.getPotentialEnerg())
 
     # reporters.save_free_energies(output_dir, meta)
     #
@@ -202,6 +213,7 @@ def main():
     # utils.save_env()
     # utils.write_to_log(args,
     #                    os.path.basename(__file__))
+
 
 ## RUN COMMAND
 if __name__ == "__main__":

@@ -52,6 +52,7 @@ def load_xyz_from_datfile(dat_file_path):
 
 class SimParams():
     def __init__(self, param_file):
+        print(f"Loading sim_params from {param_file}")
         with open(param_file) as f:
             param_dict = yaml.safe_load(f)
 
@@ -102,6 +103,27 @@ class SimParams():
         repr_str = "\n".join(repr_list)
         return repr_str
 
+class MetaParams(object):
+    """
+    Parameter object for metadynamics
+    """
+    def __init__(self, param_file):
+        print(f"Loading meta_params from {param_file}")
+
+        with open(param_file) as f:
+            param_dict = yaml.safe_load(f)
+            self.res_list = param_dict.get('res_list')
+            self.rmsd_sel = param_dict.get('selection')
+            self.min_value = param_dict.get('min_value')
+            self.max_value = param_dict.get('max_value')
+            self.bias_width = param_dict.get('bias_width')
+            self.spring_constant = param_dict.get('spring_constant')
+            self.rmsd_max = param_dict.get('rmsd_max')
+
+    def __str__(self):
+        repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]
+        repr_string = "\n".join(repr_list)
+        return repr_string + '\n'
 
 def build_virtual_bond(psf, params):
     vbond_selections = params.virtual_bond

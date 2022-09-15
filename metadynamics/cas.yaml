@@ -2,3 +2,6 @@ selection: protein_ca
 min_value: 0.1
 max_value: 0.4
 bias_width: 0.02
+## for restraints:
+spring_constant: 1000
+rmsd_max: 0.4

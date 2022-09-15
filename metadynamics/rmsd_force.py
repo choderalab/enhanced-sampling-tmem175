@@ -25,7 +25,7 @@ def get_args():
                         help="Directory containing charmm parameter files")
     parser.add_argument("-p", "--params_file", type=str, default="../sim_params/defaults.yaml",
                         help="YAML file containing simulation running values")
-    parser.add_argument('-y', "--meta_params", type=str, default=None,
+    parser.add_argument('-y', "--meta_params", type=str, default="./cas.yaml",
                         help="Path to yaml file containing residue list and min_max values")
     args = parser.parse_args()
     return args
@@ -51,6 +51,8 @@ def main():
 
     params = sb.SimParams(args.params_file)
     print(params)
+    meta_params = sb.MetaParams(args.meta_params)
+    print(meta_params)
 
     system = psf.createSystem(input_dict["params"],
                               nonbondedMethod=params.nonbonded_method,
@@ -87,26 +89,14 @@ def main():
 
     assert len(ref_positions) == len(input_dict["positions"])
 
-    if args.meta_params:
-        assert os.path.exists(args.meta_params)
-        with open(args.meta_params, "r") as f:
-            meta_dict = yaml.safe_load(f)
-        res_list = meta_dict.get('res_list')
-        rmsd_sel = meta_dict.get('selection')
-        min_value = meta_dict.get('min_value')
-        max_value = meta_dict.get('max_value')
-        bias_width = meta_dict.get('bias_width')
-    else:
-        min_value = 0.01
-        max_value = 0.4
-        rmsd_sel = 'protein_ca'
+
 
     ## Add restraint force
     restraint_idx = cv_building.get_openmm_idx(psf.topology, "protein_heavy")
     rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=input_dict["positions"],
                                                              atom_indicies=restraint_idx,
-                                                             spring_constant=1000,
-                                                             rmsd_max=0.4
+                                                             spring_constant=meta_params.spring_constant,
+                                                             rmsd_max=meta_params.rmsd_max
                                                              )
     force_group = 9
     rmsd_restraint_force.setForceGroup(force_group)
@@ -190,7 +180,7 @@ def main():
     state = sim.context.getState(getForces=True,
                                  getEnergy=True,
                                  groups=force_group)
-    print(state.getPotentialEnerg())
+    print(state.getPotentialEnergy())
 
     sim.reporters.append(reporters.CustomCVForceReporter(
         file=os.path.join(output_dir, "forces.txt"),
@@ -202,7 +192,7 @@ def main():
     print("Running simulation")
     # meta.step(sim, params.n_steps)
     sim.step(params.n_steps)
-    print(state.getPotentialEnerg())
+    print(state.getPotentialEnergy())
 
     # reporters.save_free_energies(output_dir, meta)
     #

@@ -172,6 +172,11 @@ def main():
         meta=meta
     ))
 
+    sim.reporters.append(reporters.ForceReporter(
+        file="forces.txt",
+        reportInterval=params.traj_freq,
+    ))
+
     print("Running simulation")
     meta.step(sim, params.n_steps)
 

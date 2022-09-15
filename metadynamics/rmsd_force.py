@@ -173,15 +173,6 @@ def main():
     #     meta=meta
     # ))
 
-    system = sim.context.getSystem()
-    for f in system.getForces():
-        print(f.getName(), f.getForceGroup())
-
-    state = sim.context.getState(getForces=True,
-                                 getEnergy=True,
-                                 groups=force_group)
-    print(state.getPotentialEnergy())
-
     sim.reporters.append(reporters.CustomCVForceReporter(
         file=os.path.join(output_dir, "forces.txt"),
         reportInterval=params.traj_freq,
@@ -192,7 +183,6 @@ def main():
     print("Running simulation")
     # meta.step(sim, params.n_steps)
     sim.step(params.n_steps)
-    print(state.getPotentialEnergy())
 
     # reporters.save_free_energies(output_dir, meta)
     #

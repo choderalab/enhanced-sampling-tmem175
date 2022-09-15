@@ -1,4 +1,5 @@
 import openmm
+import openmm.app.topology as topology
 
 def create_rmsd_restraint(positions,
                           atom_indicies,
@@ -15,15 +16,15 @@ def create_rmsd_restraint(positions,
     :return:
     """
     rmsd_cv = openmm.RMSDForce(positions, atom_indicies)
-    energy_expression = f"({spring_constant}/2)*max(0, RMSD-{rmsd_max})^2"
-    energy_expression += 'K_RMSD = %f;' % spring_constant.value_in_unit_system(md_unit_system)
-    energy_expression += 'RMSD0 = %f;' % restraint_distance.value_in_unit_system(md_unit_system)
-    restraint_force = CustomCVForce(energy_expression)
+    energy_expression = f"(k/2)*max(0, RMSD-RMSDmax)^2"
+    restraint_force = openmm.CustomCVForce(energy_expression)
     restraint_force.addCollectiveVariable('RMSD', rmsd_cv)
+    restraint_force.addGlobalParameter('RMSDmax', rmsd_max)
+    restraint_force.addGlobalParameter("k", spring_constant*openmm.unit.kilojoules_per_mole / openmm.unit.nanometers)
     return restraint_force
 
 
-def get_openmm_idx(topology: openmm.app.topology.Topology, selection, res_list=False):
+def get_openmm_idx(topology: topology.Topology, selection, res_list=False):
     """
     Filter based on selection and then further filter based on a passed in residue list.
 

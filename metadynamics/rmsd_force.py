@@ -106,7 +106,7 @@ def main():
     rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=ref_positions,
                                                              atom_indicies=restraint_idx,
                                                              spring_constant=1000,
-                                                             rmsd_max=0.2
+                                                             rmsd_max=0.4
                                                              )
     force_group = 9
     rmsd_restraint_force.setForceGroup(force_group)

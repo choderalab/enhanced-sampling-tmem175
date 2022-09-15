@@ -43,28 +43,42 @@ class MetadynamicsReporter():
         cv_str = ", ".join(cv_list)
         self._collective_variable_file.write(f"{cv_str}\n")
 
+
 class CustomCVForceReporter(object):
     """
     From <http://docs.openmm.org/latest/userguide/application/
     04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
     """
+
     def __init__(self, file, reportInterval, force_group):
         self._out = open(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
+        self.write_header()
 
     def __del__(self):
         self._out.close()
 
     def describeNextReport(self, simulation):
-        steps = self._reportInterval - simulation.currentStep%self._reportInterval
+        steps = self._reportInterval - simulation.currentStep % self._reportInterval
         return (steps, False, False, True, False, None)
 
     def report(self, simulation, state):
         state = simulation.context.getState(getForces=True,
-                                             getEnergy=True,
-                                             groups=self._force_group)
-        self._out.write(f'Potential Energy:\t{state.getPotentialEnergy()}\n')
+                                            getEnergy=True,
+                                            groups=self._force_group)
+        header_list = [state.getPotentialEnergy().format('%.2f')]
+        self._out.write(self.get_formated_str(header_list))
+
+    def get_formated_str(self, out_list):
+        formated_list = [f"{item:30}" for item in out_list]
+        out_str = "\t".join(formated_list) + "\n"
+        return out_str
+
+    def write_header(self):
+        header_list = ["Potential Energy"]
+        self._out.write(self.get_formated_str(header_list))
+
 
 def save_free_energies(output_dir, meta):
     print("Writing final free energies")

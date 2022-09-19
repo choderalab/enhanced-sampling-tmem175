@@ -2,8 +2,6 @@ selection: protein_heavy
 min_value: 0.2
 max_value: 8.0
 bias_width: 0.05
-spring_constant: 1000
-rmsd_max: 0.4
 res_list:
   - 46
   - 55

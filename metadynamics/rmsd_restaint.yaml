@@ -1,0 +1,5 @@
+## for restraints:
+selection: protein_ca
+spring_constant: 10000
+rmsd_max: 0.4
+force_group: 20 # group to assign restraint to

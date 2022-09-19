@@ -9,7 +9,7 @@ import yaml
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building
+from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building as cv
 
 
 ## ARGUMENT PARSING
@@ -91,32 +91,24 @@ def main():
 
     assert len(ref_positions) == len(input_dict["positions"])
 
-
-
     ## Add restraint force
     print("Adding restraint force")
     positions = input_dict["positions"]
-    restraint_idx = cv_building.get_openmm_idx(psf.topology, "protein_heavy")
-    print(meta_params.spring_constant, meta_params.rmsd_max)
-    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=ref_positions,
-                                                             atom_indicies=restraint_idx,
-                                                             spring_constant=meta_params.spring_constant,
-                                                             rmsd_max=meta_params.rmsd_max
-                                                             )
-    force_group = 20
-    rmsd_restraint_force.setForceGroup(force_group)
+    rmsd_restraint_force = cv.build_rmsd_restraint_from_yaml("rmsd_restaint.yaml",
+                                                             positions=positions,
+                                                             topology=psf.topology)
     restraint_force_idx = system.addForce(rmsd_restraint_force)
-    print(f"force group: {force_group}"
-          f"force index: {restraint_force_idx}")
+    force_group = system.getForce(restraint_force_idx).getForceGroup()
+    print(f"{rmsd_restraint_force.getName()} added to system with index {restraint_force_idx} and group {force_group}")
 
-    idx = cv_building.get_openmm_idx(psf.topology, rmsd_sel, res_list)
+    idx = cv.get_openmm_idx(psf.topology, meta_params.selection, meta_params.res_list)
 
     rmsd_force = openmm.RMSDForce(ref_positions, idx)
 
     rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-                                                     minValue=min_value,
-                                                     maxValue=max_value,
-                                                     biasWidth=bias_width,
+                                                     minValue=meta_params.min_value,
+                                                     maxValue=meta_params.max_value,
+                                                     biasWidth=meta_params.bias_width,
                                                      periodic=False)
 
     meta = openmm.app.Metadynamics(system=system,
@@ -139,7 +131,7 @@ def main():
 
     sim.context.setState(input_dict["state"])
 
-    # print("Collective Variable:\t", meta.getCollectiveVariables(sim))
+    print("Collective Variable:\t", meta.getCollectiveVariables(sim))
 
     print(
         "  initial : %8.3f kcal/mol"

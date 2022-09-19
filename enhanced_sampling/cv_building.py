@@ -1,5 +1,6 @@
-import openmm
+import openmm, yaml
 import openmm.app.topology as topology
+
 
 def create_rmsd_restraint(positions,
                           atom_indicies,
@@ -22,6 +23,23 @@ def create_rmsd_restraint(positions,
     restraint_force.addGlobalParameter('RMSDmax', rmsd_max)
     restraint_force.addGlobalParameter("spring_constant", spring_constant)
     return restraint_force
+
+
+def build_rmsd_restraint_from_yaml(file_path,
+                                   positions,
+                                   topology):
+    with open(file_path) as f:
+        restraint_dict = yaml.safe_load(f)
+
+    restraint_idx = get_openmm_idx(topology, restraint_dict["selection"])
+    print(restraint_dict["spring_constant"], restraint_dict["rmsd_max"])
+    rmsd_restraint_force = create_rmsd_restraint(positions=positions,
+                                                 atom_indicies=restraint_idx,
+                                                 spring_constant=restraint_dict["spring_constant"],
+                                                 rmsd_max=restraint_dict["rmsd_max"]
+                                                 )
+    rmsd_restraint_force.setForceGroup(restraint_dict["force_group"])
+    return rmsd_restraint_force
 
 
 def get_openmm_idx(topology: topology.Topology, selection, res_list=False):

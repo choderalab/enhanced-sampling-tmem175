@@ -57,6 +57,12 @@ class CustomCVForceReporter(object):
         self._force_idx = force_idx
         self.write_header()
 
+        ## Since I don't think I will every use bitmaps for this, enforce this to be a set
+        if type(self._force_group) == int:
+            self._force_group = {self._force_group}
+        elif type(self._force_group) == list:
+            self._force_group = set(self._force_group)
+
     def __del__(self):
         self._out.close()
 

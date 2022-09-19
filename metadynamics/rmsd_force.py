@@ -102,7 +102,7 @@ def main():
                                                              spring_constant=meta_params.spring_constant,
                                                              rmsd_max=meta_params.rmsd_max
                                                              )
-    force_group = 1
+    force_group = 20
     rmsd_restraint_force.setForceGroup(force_group)
     restraint_force_idx = system.addForce(rmsd_restraint_force)
 

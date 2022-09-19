@@ -101,6 +101,9 @@ def main():
     force_group = system.getForce(restraint_force_idx).getForceGroup()
     print(f"{rmsd_restraint_force.getName()} added to system with index {restraint_force_idx} and group {force_group}")
 
+    for force in system.getForces():
+        if force.getForceGroup() > 6:
+            print(force.getName(), force.getForceGroup())
     idx = cv.get_openmm_idx(psf.topology, meta_params.selection, meta_params.res_list)
 
     rmsd_force = openmm.RMSDForce(ref_positions, idx)
@@ -122,7 +125,8 @@ def main():
                                    )
 
     for force in system.getForces():
-        print(force.getName(), force.getForceGroup())
+        if force.getForceGroup() > 6:
+            print(force.getName(), force.getForceGroup())
 
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,
@@ -185,7 +189,6 @@ def main():
 
     print("Running simulation")
     meta.step(sim, params.n_steps)
-    # sim.step(params.n_steps)
 
     reporters.save_free_energies(output_dir, meta)
 

@@ -31,3 +31,36 @@
   notes: ''
   script: rmsd_force.py
   success: ''
+'2022-09-19T17:58:39.427677':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    meta_params: cas.yaml
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/metadynamics_rmsd
+    params_file: ../sim_params/local_test.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: rmsd_force.py
+  success: ''
+'2022-09-19T18:04:21.703383':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    meta_params: cas.yaml
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/metadynamics_rmsd
+    params_file: ../sim_params/local_test.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: rmsd_force.py
+  success: ''
+'2022-09-19T18:12:29.110021':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    meta_params: cas.yaml
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/metadynamics_rmsd
+    params_file: ../sim_params/local_test.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: rmsd_force.py
+  success: ''

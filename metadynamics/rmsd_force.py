@@ -42,6 +42,8 @@ def main():
     # sys.stderr.write = logger.error
     sys.stdout.write = logger.info
 
+    print(f"Writing to {output_dir}")
+
     utils.print_args(args)
 
     input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir)
@@ -92,13 +94,15 @@ def main():
 
 
     ## Add restraint force
+    positions = input_dict["positions"]
     restraint_idx = cv_building.get_openmm_idx(psf.topology, "protein_heavy")
-    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=input_dict["positions"],
+    print(meta_params.spring_constant, meta_params.rmsd_max)
+    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=positions,
                                                              atom_indicies=restraint_idx,
                                                              spring_constant=meta_params.spring_constant,
                                                              rmsd_max=meta_params.rmsd_max
                                                              )
-    force_group = 9
+    force_group = 1
     rmsd_restraint_force.setForceGroup(force_group)
     restraint_force_idx = system.addForce(rmsd_restraint_force)
 
@@ -122,11 +126,31 @@ def main():
     #                                biasDir=output_dir
     #                                )
 
+    for force in system.getForces():
+        print(force.getName(), force.getForceGroup())
+
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,
                                 integrator=integrator,
                                 platform=platform)
+
+    sim.context.setPositions(input_dict["state"].getPositions())
+
+    print("before setting state")
+    state = sim.context.getState(getForces=True,
+                                 getEnergy=True,
+                                 groups=force_group)
+    print(f"Potential Energy: {state.getPotentialEnergy().format('%.2f')}")
+    print(f"Forces: {str(state.getForces()[0])}")
+
     sim.context.setState(input_dict["state"])
+
+    print("after setting state")
+    state = sim.context.getState(getForces=True,
+                                 getEnergy=True,
+                                 groups=force_group)
+    print(f"Potential Energy: {state.getPotentialEnergy().format('%.2f')}")
+    print(f"Forces: {str(state.getForces()[0])}")
 
     # print("Collective Variable:\t", meta.getCollectiveVariables(sim))
 

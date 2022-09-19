@@ -62,7 +62,7 @@ class CustomCVForceReporter(object):
 
     def describeNextReport(self, simulation):
         steps = self._reportInterval - simulation.currentStep % self._reportInterval
-        return (steps, False, False, True, False, None)
+        return (steps, False, False, False, False, None)
 
     def report(self, simulation, state):
         state = simulation.context.getState(getForces=True,
@@ -72,9 +72,10 @@ class CustomCVForceReporter(object):
         force = system.getForce(self._force_idx)
 
         out_list = [state.getPotentialEnergy().format('%.2f'),
-                       str(force.getCollectiveVariableValues(simulation.context)),
-                       str(state.getForces().value_in_unit(unit.kilojoules/unit.mole/unit.nanometer)[0])
-                       ]
+                    state.getKineticEnergy().format('%.2f'),
+                    str(force.getCollectiveVariableValues(simulation.context)),
+                    str(state.getForces().value_in_unit(unit.kilojoules / unit.mole / unit.nanometer)[0])
+                    ]
         self._out.write(self.get_formated_str(out_list))
 
     def get_formated_str(self, out_list):
@@ -83,7 +84,7 @@ class CustomCVForceReporter(object):
         return out_str
 
     def write_header(self):
-        header_list = ["Potential Energy", "CustomCV", "Forces"]
+        header_list = ["Potential Energy", "Kinetic Energy", "CustomCV", "Forces"]
         self._out.write(self.get_formated_str(header_list))
 
 

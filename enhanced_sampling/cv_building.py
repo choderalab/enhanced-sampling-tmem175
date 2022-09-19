@@ -16,11 +16,12 @@ def create_rmsd_restraint(positions,
     :return:
     """
     rmsd_cv = openmm.RMSDForce(positions, atom_indicies)
-    energy_expression = f"(k/2)*max(0, RMSD-RMSDmax)^2"
+    # energy_expression = f"(spring_constant/2)*max(0, RMSD-RMSDmax)^2"
+    energy_expression = f"RMSD"
     restraint_force = openmm.CustomCVForce(energy_expression)
     restraint_force.addCollectiveVariable('RMSD', rmsd_cv)
-    restraint_force.addGlobalParameter('RMSDmax', rmsd_max)
-    restraint_force.addGlobalParameter("k", spring_constant)
+    # restraint_force.addGlobalParameter('RMSDmax', rmsd_max)
+    # restraint_force.addGlobalParameter("spring_constant", spring_constant*openmm.unit.kilojoules_per_mole/openmm.unit.nanometers)
     # *openmm.unit.kilojoules_per_mole / openmm.unit.nanometers
     return restraint_force
 

@@ -94,10 +94,11 @@ def main():
 
 
     ## Add restraint force
+    print("Adding restraint force")
     positions = input_dict["positions"]
     restraint_idx = cv_building.get_openmm_idx(psf.topology, "protein_heavy")
     print(meta_params.spring_constant, meta_params.rmsd_max)
-    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=positions,
+    rmsd_restraint_force = cv_building.create_rmsd_restraint(positions=ref_positions,
                                                              atom_indicies=restraint_idx,
                                                              spring_constant=meta_params.spring_constant,
                                                              rmsd_max=meta_params.rmsd_max
@@ -105,6 +106,8 @@ def main():
     force_group = 20
     rmsd_restraint_force.setForceGroup(force_group)
     restraint_force_idx = system.addForce(rmsd_restraint_force)
+    print(f"force group: {force_group}"
+          f"force index: {restraint_force_idx}")
 
     # idx = cv_building.get_openmm_idx(psf.topology, rmsd_sel, res_list)
     #
@@ -134,23 +137,7 @@ def main():
                                 integrator=integrator,
                                 platform=platform)
 
-    sim.context.setPositions(input_dict["state"].getPositions())
-
-    print("before setting state")
-    state = sim.context.getState(getForces=True,
-                                 getEnergy=True,
-                                 groups=force_group)
-    print(f"Potential Energy: {state.getPotentialEnergy().format('%.2f')}")
-    print(f"Forces: {str(state.getForces()[0])}")
-
     sim.context.setState(input_dict["state"])
-
-    print("after setting state")
-    state = sim.context.getState(getForces=True,
-                                 getEnergy=True,
-                                 groups=force_group)
-    print(f"Potential Energy: {state.getPotentialEnergy().format('%.2f')}")
-    print(f"Forces: {str(state.getForces()[0])}")
 
     # print("Collective Variable:\t", meta.getCollectiveVariables(sim))
 
@@ -215,8 +202,8 @@ def main():
     #
     # print("Script cleanup")
     # utils.save_env()
-    # utils.write_to_log(args,
-    #                    os.path.basename(__file__))
+    utils.write_to_log(args,
+                       os.path.basename(__file__))
 
 
 ## RUN COMMAND

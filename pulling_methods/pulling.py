@@ -53,8 +53,8 @@ def main():
 
     params = schema.SimParams(args.params_file)
     print(params)
-    meta_params = schema.MetaParams(args.meta_params)
-    print(meta_params)
+    pulling_params = schema.PullingParams(args.pulling_params)
+    print(pulling_params)
 
     system = psf.createSystem(input_dict["params"],
                               nonbondedMethod=params.nonbonded_method,
@@ -84,45 +84,6 @@ def main():
     system.addForce(vbond_force)
 
     platform = sb.get_platform_from_params(params)
-
-    ref_dict = sb.load_input_dir(args.reference_dir, load_psf=False)
-
-    ref_positions = ref_dict['positions']
-
-    assert len(ref_positions) == len(input_dict["positions"])
-
-    ## Add restraint force
-    print("Adding restraint force")
-    positions = input_dict["positions"]
-    rmsd_restraint_force = cv.build_rmsd_restraint_from_yaml("rmsd_restaint.yaml",
-                                                             positions=positions,
-                                                             topology=psf.topology)
-    restraint_force_idx = system.addForce(rmsd_restraint_force)
-    force_group = system.getForce(restraint_force_idx).getForceGroup()
-    print(f"{rmsd_restraint_force.getName()} added to system with index {restraint_force_idx} and group {force_group}")
-
-    for force in system.getForces():
-        if force.getForceGroup() > 6:
-            print(force.getName(), force.getForceGroup())
-    idx = cv.get_openmm_idx(psf.topology, meta_params.selection, meta_params.res_list)
-
-    rmsd_force = openmm.RMSDForce(ref_positions, idx)
-
-    rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-                                                     minValue=meta_params.min_value,
-                                                     maxValue=meta_params.max_value,
-                                                     biasWidth=meta_params.bias_width,
-                                                     periodic=False)
-
-    meta = openmm.app.Metadynamics(system=system,
-                                   variables=[rmsd_bias],
-                                   temperature=params.temperature,
-                                   biasFactor=5,
-                                   height=1,
-                                   frequency=1,
-                                   saveFrequency=10,
-                                   biasDir=output_dir
-                                   )
 
     for force in system.getForces():
         if force.getForceGroup() > 6:

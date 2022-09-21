@@ -1,0 +1,88 @@
+Writing to ../../enhanced-sampling-tmem175-data/pulling/sim02
+
+
+input_dir: ../systems/system01
+
+
+reference_dir: ../systems/system00
+
+
+output_dir: ../../enhanced-sampling-tmem175-data/pulling
+
+
+charmm_param_dir: ../forcefield_data/charmm-params
+
+
+params_file: ../sim_params/defaults.yaml
+
+
+pulling_params: ../pulling_methods/cas.yaml
+
+
+Loading psf from ../systems/system01/step5_input.psf
+
+
+Loading Charmm params from ../forcefield_data/charmm-params
+
+
+dict_keys(['psf', 'params', 'state', 'positions'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/defaults.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 5000000
+report_freq         : 50000
+chk_freq            : 250000
+traj_freq           : 50000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 5000000, 'Report Freq': 50000, 'Checkpoint Freq': 250000, 'Trajectory Freq': 50000}
+time_dict           : {'Total Time': Quantity(value=10000.0, unit=picosecond), 'Report Freq': Quantity(value=100.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=100.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	10.00 ns            10000.00 ps         10000000.00 fs      
+Report Freq         :	0.10 ns             100.00 ps           100000.00 fs        
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.10 ns             100.00 ps           100000.00 fs        
+Number of Frames    :	100
+Number of Steps     :	5000000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Traceback (most recent call last):
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts/../pulling_methods/pulling.py", line 184, in <module>
+    main()
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts/../pulling_methods/pulling.py", line 102, in main
+    idx_list = cv.get_openmm_idx(psf.topology, selection=params.selection)
+AttributeError: 'SimParams' object has no attribute 'selection'

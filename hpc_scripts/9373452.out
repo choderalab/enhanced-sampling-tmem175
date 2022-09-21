@@ -1,0 +1,61 @@
+Sender: LSF System <lsfadmin@ls10>
+Subject: Job 9373452: <#!/usr/bin/env bash;# Set walltime limit;#BSUB -W 36:00; # Set output file;#BSUB -o  %J.out; # Set error file;#BSUB -e %J.stderr; # Specify node group;#BSUB -q gpuqueue; # nodes: number of nodes and GPU request;#BSUB -n 1 -R "rusage[mem=8]";#BSUB -gpu "num=1:j_exclusive=yes:mode=shared";  source ~/.bashrc;conda activate enhanced-sampling-tmem175;python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling/cas.yaml> in cluster <lila> Exited
+
+Job <#!/usr/bin/env bash;# Set walltime limit;#BSUB -W 36:00; # Set output file;#BSUB -o  %J.out; # Set error file;#BSUB -e %J.stderr; # Specify node group;#BSUB -q gpuqueue; # nodes: number of nodes and GPU request;#BSUB -n 1 -R "rusage[mem=8]";#BSUB -gpu "num=1:j_exclusive=yes:mode=shared";  source ~/.bashrc;conda activate enhanced-sampling-tmem175;python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling/cas.yaml> was submitted from host <lilac-ln02> by user <paynea> in cluster <lila> at Wed Sep 21 12:59:26 2022
+Job was executed on host(s) <ls10>, in queue <gpuqueue>, as user <paynea> in cluster <lila> at Wed Sep 21 12:59:27 2022
+</home/paynea> was used as the home directory.
+</data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts> was used as the working directory.
+Started at Wed Sep 21 12:59:27 2022
+Terminated at Wed Sep 21 13:00:06 2022
+Results reported at Wed Sep 21 13:00:06 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/usr/bin/env bash
+# Set walltime limit
+#BSUB -W 36:00
+
+# Set output file
+#BSUB -o  %J.out
+
+# Set error file
+#BSUB -e %J.stderr
+
+# Specify node group
+#BSUB -q gpuqueue
+
+# nodes: number of nodes and GPU request
+#BSUB -n 1 -R "rusage[mem=8]"
+#BSUB -gpu "num=1:j_exclusive=yes:mode=shared"
+
+
+source ~/.bashrc
+conda activate enhanced-sampling-tmem175
+python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling/cas.yaml
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   28.68 sec.
+    Max Memory :                                 1 GB
+    Average Memory :                             0.52 GB
+    Total Requested Memory :                     8.00 GB
+    Delta Memory :                               7.00 GB
+    Max Swap :                                   -
+    Max Processes :                              6
+    Max Threads :                                7
+    Run time :                                   40 sec.
+    Turnaround time :                            40 sec.
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <9373452.stderr> for stderr output of this job.
+

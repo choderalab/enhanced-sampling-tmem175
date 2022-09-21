@@ -1,16 +1,48 @@
-import openmm
-
-# def create_rmsd_restraint(positions, atom_indicies):
-#     rmsd_cv = openmm.RMSDForce(positions, atom_indicies)
-#     energy_expression = 'step(dRMSD) * (K_RMSD/2) * dRMSD^2; dRMSD = (RMSD-RMSD0);'
-#     energy_expression += 'K_RMSD = %f;' % spring_constant.value_in_unit_system(md_unit_system)
-#     energy_expression += 'RMSD0 = %f;' % restraint_distance.value_in_unit_system(md_unit_system)
-#     restraint_force = CustomCVForce(energy_expression)
-#     restraint_force.addCollectiveVariable('RMSD', rmsd_cv)
-#     return restraint_force
+import openmm, yaml
+import openmm.app.topology as topology
 
 
-def get_openmm_idx(topology: openmm.app.topology.Topology, selection, res_list=False):
+def create_rmsd_restraint(positions,
+                          atom_indicies,
+                          spring_constant,
+                          rmsd_max):
+    """
+    The goal is to make a flat-bottom, 1 side harmonic potential
+
+    :param positions:
+    :param atom_indicies:
+    :param spring_constant:
+    :param rmsd_max:
+        Max RMSD value
+    :return:
+    """
+    rmsd_cv = openmm.RMSDForce(positions, atom_indicies)
+    energy_expression = f"(spring_constant/2)*max(0, RMSD-RMSDmax)^2"
+    restraint_force = openmm.CustomCVForce(energy_expression)
+    restraint_force.addCollectiveVariable('RMSD', rmsd_cv)
+    restraint_force.addGlobalParameter('RMSDmax', rmsd_max)
+    restraint_force.addGlobalParameter("spring_constant", spring_constant)
+    return restraint_force
+
+
+def build_rmsd_restraint_from_yaml(file_path,
+                                   positions,
+                                   topology):
+    with open(file_path) as f:
+        restraint_dict = yaml.safe_load(f)
+
+    restraint_idx = get_openmm_idx(topology, restraint_dict["selection"])
+    print(restraint_dict["spring_constant"], restraint_dict["rmsd_max"])
+    rmsd_restraint_force = create_rmsd_restraint(positions=positions,
+                                                 atom_indicies=restraint_idx,
+                                                 spring_constant=restraint_dict["spring_constant"],
+                                                 rmsd_max=restraint_dict["rmsd_max"]
+                                                 )
+    rmsd_restraint_force.setForceGroup(restraint_dict["force_group"])
+    return rmsd_restraint_force
+
+
+def get_openmm_idx(topology: topology.Topology, selection, res_list=False):
     """
     Filter based on selection and then further filter based on a passed in residue list.
 

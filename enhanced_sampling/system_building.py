@@ -52,6 +52,7 @@ def load_xyz_from_datfile(dat_file_path):
 
 class SimParams():
     def __init__(self, param_file):
+        print(f"Loading sim_params from {param_file}")
         with open(param_file) as f:
             param_dict = yaml.safe_load(f)
 
@@ -95,12 +96,35 @@ class SimParams():
         return repr_string + '\n' + self.get_time_scales()
 
     def get_time_scales(self):
-        repr_list = [f"{key:20}:\t{value.in_units_of(unit.nanoseconds).format('%04.2f'):20}{value.in_units_of(unit.picoseconds).format('%04.2f'):20}{value.in_units_of(unit.femtoseconds).format('%04.2f'):20}"
-                     for key, value, in self.time_dict.items()]
+        repr_list = [
+            f"{key:20}:\t{value.in_units_of(unit.nanoseconds).format('%04.2f'):20}{value.in_units_of(unit.picoseconds).format('%04.2f'):20}{value.in_units_of(unit.femtoseconds).format('%04.2f'):20}"
+            for key, value, in self.time_dict.items()]
 
         repr_list.append(f"{'Number of Frames':20}:\t{self.n_frames}")
         repr_str = "\n".join(repr_list)
         return repr_str
+
+
+class MetaParams(object):
+    """
+    Parameter object for metadynamics
+    """
+
+    def __init__(self, param_file):
+        print(f"Loading meta_params from {param_file}")
+
+        with open(param_file) as f:
+            param_dict = yaml.safe_load(f)
+            self.res_list = param_dict.get('res_list')
+            self.selection = param_dict.get('selection')
+            self.min_value = param_dict.get('min_value')
+            self.max_value = param_dict.get('max_value')
+            self.bias_width = param_dict.get('bias_width')
+
+    def __str__(self):
+        repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]
+        repr_string = "\n".join(repr_list)
+        return repr_string + '\n'
 
 
 def build_virtual_bond(psf, params):

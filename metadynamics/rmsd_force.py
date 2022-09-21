@@ -9,7 +9,7 @@ import yaml
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building
+from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building as cv
 
 
 ## ARGUMENT PARSING
@@ -25,7 +25,7 @@ def get_args():
                         help="Directory containing charmm parameter files")
     parser.add_argument("-p", "--params_file", type=str, default="../sim_params/defaults.yaml",
                         help="YAML file containing simulation running values")
-    parser.add_argument('-y', "--meta_params", type=str, default=None,
+    parser.add_argument('-y', "--meta_params", type=str, default="./cas.yaml",
                         help="Path to yaml file containing residue list and min_max values")
     args = parser.parse_args()
     return args
@@ -42,6 +42,8 @@ def main():
     # sys.stderr.write = logger.error
     sys.stdout.write = logger.info
 
+    print(f"Writing to {output_dir}")
+
     utils.print_args(args)
 
     input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir)
@@ -51,6 +53,8 @@ def main():
 
     params = sb.SimParams(args.params_file)
     print(params)
+    meta_params = sb.MetaParams(args.meta_params)
+    print(meta_params)
 
     system = psf.createSystem(input_dict["params"],
                               nonbondedMethod=params.nonbonded_method,
@@ -82,33 +86,32 @@ def main():
     platform = sb.get_platform_from_params(params)
 
     ref_dict = sb.load_input_dir(args.reference_dir, load_psf=False)
-    ref_psf = ref_dict['psf']
+
     ref_positions = ref_dict['positions']
 
     assert len(ref_positions) == len(input_dict["positions"])
 
-    if args.meta_params:
-        assert os.path.exists(args.meta_params)
-        with open(args.meta_params, "r") as f:
-            meta_dict = yaml.safe_load(f)
-        res_list = meta_dict.get('res_list')
-        rmsd_sel = meta_dict.get('selection')
-        min_value = meta_dict.get('min_value')
-        max_value = meta_dict.get('max_value')
-        bias_width = meta_dict.get('bias_width')
-    else:
-        min_value = 0.01
-        max_value = 0.4
-        rmsd_sel = 'protein_ca'
+    ## Add restraint force
+    print("Adding restraint force")
+    positions = input_dict["positions"]
+    rmsd_restraint_force = cv.build_rmsd_restraint_from_yaml("rmsd_restaint.yaml",
+                                                             positions=positions,
+                                                             topology=psf.topology)
+    restraint_force_idx = system.addForce(rmsd_restraint_force)
+    force_group = system.getForce(restraint_force_idx).getForceGroup()
+    print(f"{rmsd_restraint_force.getName()} added to system with index {restraint_force_idx} and group {force_group}")
 
-    idx = cv_building.get_openmm_idx(psf.topology, rmsd_sel, res_list)
+    for force in system.getForces():
+        if force.getForceGroup() > 6:
+            print(force.getName(), force.getForceGroup())
+    idx = cv.get_openmm_idx(psf.topology, meta_params.selection, meta_params.res_list)
 
     rmsd_force = openmm.RMSDForce(ref_positions, idx)
 
     rmsd_bias = openmm.app.metadynamics.BiasVariable(force=rmsd_force,
-                                                     minValue=min_value,
-                                                     maxValue=max_value,
-                                                     biasWidth=bias_width,
+                                                     minValue=meta_params.min_value,
+                                                     maxValue=meta_params.max_value,
+                                                     biasWidth=meta_params.bias_width,
                                                      periodic=False)
 
     meta = openmm.app.Metadynamics(system=system,
@@ -121,13 +124,18 @@ def main():
                                    biasDir=output_dir
                                    )
 
+    for force in system.getForces():
+        if force.getForceGroup() > 6:
+            print(force.getName(), force.getForceGroup())
+
     sim = openmm.app.Simulation(psf.topology,
                                 system=system,
                                 integrator=integrator,
                                 platform=platform)
+
     sim.context.setState(input_dict["state"])
 
-    print(meta.getCollectiveVariables(sim))
+    print("Collective Variable:\t", meta.getCollectiveVariables(sim))
 
     print(
         "  initial : %8.3f kcal/mol"
@@ -172,11 +180,17 @@ def main():
         meta=meta
     ))
 
+    sim.reporters.append(reporters.CustomCVForceReporter(
+        file=os.path.join(output_dir, "forces.txt"),
+        reportInterval=params.traj_freq,
+        force_group=force_group,
+        force_idx=restraint_force_idx
+    ))
+
     print("Running simulation")
     meta.step(sim, params.n_steps)
 
     reporters.save_free_energies(output_dir, meta)
-
 
     print(f"Writing simulation files to {output_dir}")
     ss.write_simulation_files(sim, output_dir)
@@ -185,6 +199,7 @@ def main():
     utils.save_env()
     utils.write_to_log(args,
                        os.path.basename(__file__))
+
 
 ## RUN COMMAND
 if __name__ == "__main__":

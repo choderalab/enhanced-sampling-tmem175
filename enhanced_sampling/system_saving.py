@@ -11,6 +11,7 @@ def write_simulation_files(sim, output_dir):
         enforcePeriodicBox=True,
         getParameters=True
     )
+    sim.system.setDefaultPeriodicBoxVectors(*state.getPeriodicBoxVectors())
     system = sim.context.getSystem()
     integrator = sim.context.getIntegrator()
 
@@ -38,7 +39,7 @@ def write_simulation_files(sim, output_dir):
 
     # Save and serialize system
     print("Saving system")
-    sim.system.setDefaultPeriodicBoxVectors(*state.getPeriodicBoxVectors())
+
     with bz2.open(output_system_file, "wt") as outfile:
         xml = openmm.XmlSerializer.serialize(system)
         outfile.write(xml)

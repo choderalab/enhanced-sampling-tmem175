@@ -120,7 +120,12 @@ def main():
                                 integrator=integrator,
                                 platform=platform)
 
+    ## Set state (positions, box vectors, velocities)
     sim.context.setState(input_dict["state"])
+
+    ## reset time and step count to 0
+    sim.context.setTime(0)
+    sim.context.setStepCount(0)
 
     print(
         "  initial : %8.3f kcal/mol"

@@ -1,0 +1,11 @@
+'2022-09-21T18:44:34.730794':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling
+    params_file: ../sim_params/local_test.yaml
+    pulling_params: cas.yaml
+    reference_dir: ../systems/system01
+  notes: ''
+  script: pulling.py
+  success: ''

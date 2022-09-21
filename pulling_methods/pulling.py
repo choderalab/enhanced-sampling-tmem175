@@ -91,7 +91,8 @@ def main():
 
     platform = sb.get_platform_from_params(params)
 
-    ## Implement Enhanced Sampling here!
+    ## Implement Enhanced Sampling here! ###############################################################################
+    ####################################################################################################################
     ref_dict = sb.load_input_dir(args.reference_dir, load_psf=False)
 
     ref_positions = ref_dict['positions']
@@ -102,10 +103,13 @@ def main():
 
     restraint_positions = {idx: ref_positions[idx] for idx in idx_list}
 
-    force = cv.create_harmonic_pulling_force(restraint_positions, 1000)
-    force.setForceGroup(20)
+    force = cv.create_harmonic_pulling_force(restraint_positions, pulling_params.spring_constant)
+    force.setForceGroup(pulling_params.force_group)
 
     print(f"Adding {force.getName()} to system with {force.getNumParticles()} particles")
+    force_idx = system.addForce(force)
+
+    ###################################################################################################################
 
     for force in system.getForces():
         if force.getForceGroup() > 6:
@@ -159,12 +163,12 @@ def main():
     sim.reporters.append(reporters.CustomForceReporter(
         file=os.path.join(output_dir, "forces.txt"),
         reportInterval=params.traj_freq,
-        force_group=force_group,
-        force_idx=restraint_force_idx
+        force_group=pulling_params.force_group,
+        force_idx=force_idx
     ))
 
     print("Running simulation")
-    sim.step(sim, params.n_steps)
+    sim.step(params.n_steps)
 
     print(f"Writing simulation files to {output_dir}")
     ss.write_simulation_files(sim, output_dir)

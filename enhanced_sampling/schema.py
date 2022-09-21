@@ -1,11 +1,26 @@
 import yaml, openmm.unit as unit, openmm
+import openmm.app as app
 
-class SimParams(object):
+
+class Params(object):
     def __init__(self, param_file):
         print(f"Loading sim_params from {param_file}")
         with open(param_file) as f:
             param_dict = yaml.safe_load(f)
 
+        self.set_attributes(param_dict)
+
+    def set_attributes(self, param_dict):
+        pass
+
+    def __str__(self):
+        repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]
+        repr_string = "\n".join(repr_list)
+        return repr_string
+
+
+class SimParams(Params):
+    def set_attributes(self, param_dict):
         ## Parameters with units
         self.hydrogen_mass = param_dict['hydrogen_mass'] * unit.amu
         self.temperature = param_dict['temperature'] * unit.kelvin
@@ -26,8 +41,8 @@ class SimParams(object):
         self.precision = param_dict.get("precision")
 
         ## Parameters that are actually objects
-        self.nonbonded_method = getattr(openmm.app, param_dict['nonbonded_method'])
-        self.constraints = getattr(openmm.app, param_dict['constraints'])
+        self.nonbonded_method = getattr(app, param_dict['nonbonded_method'])
+        self.constraints = getattr(app, param_dict['constraints'])
 
         self.steps_dict = {
             "Total Time": self.n_steps,
@@ -40,43 +55,40 @@ class SimParams(object):
                           for key, value in self.steps_dict.items()}
         self.n_frames = int(self.n_steps / self.traj_freq)
 
-    def __str__(self):
-        repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]
-        repr_string = "\n".join(repr_list)
-        return repr_string + '\n' + self.get_time_scales()
-
     def get_time_scales(self):
         repr_list = [
             f"{key:20}:\t{value.in_units_of(unit.nanoseconds).format('%04.2f'):20}{value.in_units_of(unit.picoseconds).format('%04.2f'):20}{value.in_units_of(unit.femtoseconds).format('%04.2f'):20}"
             for key, value, in self.time_dict.items()]
 
         repr_list.append(f"{'Number of Frames':20}:\t{self.n_frames}")
+        repr_list.append(f"{'Number of Steps':20}:\t{self.n_steps}")
         repr_str = "\n".join(repr_list)
         return repr_str
-
-
-class MetaParams(object):
-    """
-    Parameter object for metadynamics
-    """
-
-    def __init__(self, param_file):
-        print(f"Loading meta_params from {param_file}")
-
-        with open(param_file) as f:
-            param_dict = yaml.safe_load(f)
-            self.res_list = param_dict.get('res_list')
-            self.selection = param_dict.get('selection')
-            self.min_value = param_dict.get('min_value')
-            self.max_value = param_dict.get('max_value')
-            self.bias_width = param_dict.get('bias_width')
 
     def __str__(self):
         repr_list = [f"{key:20}: {value}" for key, value, in self.__dict__.items()]
         repr_string = "\n".join(repr_list)
-        return repr_string + '\n'
+        return repr_string + '\n' + self.get_time_scales()
 
-class PullingParams(object):
+
+class MetaParams(Params):
+    """
+    Parameter object for metadynamics
+    """
+
+    def set_attributes(self, param_dict):
+        self.res_list = param_dict.get('res_list')
+        self.selection = param_dict.get('selection')
+        self.min_value = param_dict.get('min_value')
+        self.max_value = param_dict.get('max_value')
+        self.bias_width = param_dict.get('bias_width')
+
+
+class PullingParams(Params):
     """
     Parameter object for pulling simulations.
     """
+
+    def set_attributes(self, param_dict):
+        self.spring_constant = param_dict.get('spring_constant')
+        self.force_group = param_dict.get('force_group')

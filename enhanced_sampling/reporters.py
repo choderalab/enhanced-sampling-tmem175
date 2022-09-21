@@ -94,6 +94,60 @@ class CustomCVForceReporter(object):
         self._out.write(self.get_formated_str(header_list))
 
 
+class CustomForceReporter(object):
+    """
+    From <http://docs.openmm.org/latest/userguide/application/
+    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
+    """
+
+    def __init__(self, file, reportInterval, force_group, force_idx):
+        self._out = open(file, 'w')
+        self._reportInterval = reportInterval
+        self._force_group = force_group
+        self._force_idx = force_idx
+        self.write_header()
+
+        ## Since I don't think I will every use bitmaps for this, enforce this to be a set
+        if type(self._force_group) == int:
+            self._force_group = {self._force_group}
+        elif type(self._force_group) == list:
+            self._force_group = set(self._force_group)
+
+    def __del__(self):
+        self._out.close()
+
+    def describeNextReport(self, simulation):
+        steps = self._reportInterval - simulation.currentStep % self._reportInterval
+        return (steps, False, False, False, False, None)
+
+    def report(self, simulation, state):
+        state = simulation.context.getState(getForces=True,
+                                            getEnergy=True,
+                                            groups=self._force_group)
+        # system = simulation.context.getSystem()
+        # force = system.getForce(self._force_idx)
+
+        out_list = [
+            state.getPotentialEnergy().format('%.2f'),
+            state.getKineticEnergy().format('%.2f'),
+            # str(state.getForces().value_in_unit(unit.kilojoules / unit.mole / unit.nanometer)[0])
+        ]
+        self._out.write(self.get_formated_str(out_list))
+
+    def get_formated_str(self, out_list):
+        formated_list = [f"{item:30}" for item in out_list]
+        out_str = "\t".join(formated_list) + "\n"
+        return out_str
+
+    def write_header(self):
+        header_list = [
+            "Potential Energy",
+            "Kinetic Energy",
+            # "Forces"
+        ]
+        self._out.write(self.get_formated_str(header_list))
+
+
 def save_free_energies(output_dir, meta):
     print("Writing final free energies")
     with open(os.path.join(output_dir, "free_energies.npy"), "wb") as f:

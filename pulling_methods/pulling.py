@@ -155,13 +155,8 @@ def main():
         reportInterval=params.traj_freq
     )
     )
-    sim.reporters.append(reporters.MetadynamicsReporter(
-        collective_variable_file=os.path.join(output_dir, "collective_variables.txt"),
-        reportInterval=params.traj_freq,
-        meta=meta
-    ))
 
-    sim.reporters.append(reporters.CustomCVForceReporter(
+    sim.reporters.append(reporters.CustomForceReporter(
         file=os.path.join(output_dir, "forces.txt"),
         reportInterval=params.traj_freq,
         force_group=force_group,
@@ -169,9 +164,7 @@ def main():
     ))
 
     print("Running simulation")
-    meta.step(sim, params.n_steps)
-
-    reporters.save_free_energies(output_dir, meta)
+    sim.step(sim, params.n_steps)
 
     print(f"Writing simulation files to {output_dir}")
     ss.write_simulation_files(sim, output_dir)

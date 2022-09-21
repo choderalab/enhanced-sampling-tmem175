@@ -20,5 +20,7 @@
 
 source ~/.bashrc
 conda activate enhanced-sampling-tmem175
-python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling_methods/cas.yaml
+#python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling_methods/cas.yaml
 #python ../pulling_methods/pulling.py -i ../systems/system01 -r ../systems/system00 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling_methods/cas.yaml
+python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml
+#python ../pulling_methods/pulling.py -i ../systems/system01 -r ../systems/system00 -o ../../enhanced-sampling-tmem175-data/pulling -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml

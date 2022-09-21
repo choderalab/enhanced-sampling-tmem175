@@ -42,6 +42,22 @@ def build_rmsd_restraint_from_yaml(file_path,
     return rmsd_restraint_force
 
 
+def create_harmonic_pulling_force(restraints_dict, spring_constant):
+    """
+    Expects a dictionary that looks like {atom_idx: (x0, y0, z0), ...}
+    :return:
+    """
+    force = openmm.CustomExternalForce("k*((x-x0)^2+(y-y0)^2+(z-z0)^2)")
+    force.addGlobalParameter("k", spring_constant)
+    force.addPerParticleParameter("x0")
+    force.addPerParticleParameter("y0")
+    force.addPerParticleParameter("z0")
+
+    for atom_idx, (x, y, z) in restraints_dict.items():
+        force.addParticle(atom_idx, [x, y, z])
+    return force
+
+
 def get_openmm_idx(topology: topology.Topology, selection, res_list=False):
     """
     Filter based on selection and then further filter based on a passed in residue list.

@@ -9,7 +9,12 @@ import yaml
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building as cv, schema
+from enhanced_sampling import (utils,
+                               system_building as sb,
+                               system_saving as ss,
+                               reporters,
+                               cv_building as cv,
+                               schema)
 
 
 ## ARGUMENT PARSING
@@ -25,7 +30,7 @@ def get_args():
                         help="Directory containing charmm parameter files")
     parser.add_argument("-p", "--params_file", type=str, default="../sim_params/defaults.yaml",
                         help="YAML file containing simulation running values")
-    parser.add_argument('-y', "--meta_params", type=str, default="./cas.yaml",
+    parser.add_argument('-y', "--pulling_params", type=str, default="./cas.yaml",
                         help="Path to yaml file containing residue list and min_max values")
     args = parser.parse_args()
     return args
@@ -50,6 +55,7 @@ def main():
     print(input_dict.keys())
     psf = input_dict["psf"]
     print(psf.topology)
+    positions = input_dict["positions"]
 
     params = schema.SimParams(args.params_file)
     print(params)
@@ -85,6 +91,22 @@ def main():
 
     platform = sb.get_platform_from_params(params)
 
+    ## Implement Enhanced Sampling here!
+    ref_dict = sb.load_input_dir(args.reference_dir, load_psf=False)
+
+    ref_positions = ref_dict['positions']
+
+    assert len(ref_positions) == len(positions)
+
+    idx_list = cv.get_openmm_idx(psf.topology, selection="protein_ca")
+
+    restraint_positions = {idx: ref_positions[idx] for idx in idx_list}
+
+    force = cv.create_harmonic_pulling_force(restraint_positions, 1000)
+    force.setForceGroup(20)
+
+    print(f"Adding {force.getName()} to system with {force.getNumParticles()} particles")
+
     for force in system.getForces():
         if force.getForceGroup() > 6:
             print(force.getName(), force.getForceGroup())
@@ -95,8 +117,6 @@ def main():
                                 platform=platform)
 
     sim.context.setState(input_dict["state"])
-
-    print("Collective Variable:\t", meta.getCollectiveVariables(sim))
 
     print(
         "  initial : %8.3f kcal/mol"

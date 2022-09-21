@@ -99,7 +99,7 @@ def main():
 
     assert len(ref_positions) == len(positions)
 
-    idx_list = cv.get_openmm_idx(psf.topology, selection="protein_ca")
+    idx_list = cv.get_openmm_idx(psf.topology, selection=params.selection)
 
     restraint_positions = {idx: ref_positions[idx] for idx in idx_list}
 

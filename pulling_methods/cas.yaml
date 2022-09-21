@@ -1,2 +1,3 @@
+selection: protein_ca
 spring_constant: 1000 # kj/mol/nm^2
 force_group: 20

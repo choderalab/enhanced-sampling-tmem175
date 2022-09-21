@@ -92,3 +92,4 @@ class PullingParams(Params):
     def set_attributes(self, param_dict):
         self.spring_constant = param_dict.get('spring_constant')
         self.force_group = param_dict.get('force_group')
+        self.selection = param_dict.get('selection')

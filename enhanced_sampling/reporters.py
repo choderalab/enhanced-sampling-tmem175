@@ -3,6 +3,11 @@ import os
 import numpy
 
 class CustomReporter(object):
+    """
+    From <http://docs.openmm.org/latest/userguide/application/
+    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
+    """
+
     def __del__(self):
         self._out.close()
 
@@ -55,10 +60,6 @@ class MetadynamicsReporter(CustomReporter):
 
 
 class CustomCVForceReporter(CustomReporter):
-    """
-    From <http://docs.openmm.org/latest/userguide/application/
-    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
-    """
 
     def __init__(self, file, reportInterval, force_group, force_idx):
         self._out = open(file, 'w')
@@ -95,10 +96,6 @@ class CustomCVForceReporter(CustomReporter):
 
 
 class CustomEnergyReporter(CustomReporter):
-    """
-    From <http://docs.openmm.org/latest/userguide/application/
-    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
-    """
 
     def __init__(self, file, reportInterval, force_group):
         self._out = open(file, 'w')
@@ -132,15 +129,11 @@ class CustomEnergyReporter(CustomReporter):
         self._out.flush()
 
 class CustomForceReporter(CustomReporter):
-    """
-    From <http://docs.openmm.org/latest/userguide/application/
-    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
-    """
-
-    def __init__(self, file, reportInterval, force_group):
+    def __init__(self, file, reportInterval, force_group, atom_idx):
         self._out = open(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
+        self._atom_idx = atom_idx
 
         ## Since I don't think I will every use bitmaps for this, enforce this to be a set
         if type(self._force_group) == int:
@@ -156,7 +149,10 @@ class CustomForceReporter(CustomReporter):
         state = simulation.context.getState(getForces=True,
                                             getEnergy=True,
                                             groups=self._force_group)
-        self._out.write(state.getForces())
+        forces = state.getForces(asNumpy=True).value_in_unit(unit.kilojoules_per_mole / unit.nanometer)
+        write_list = [f"{','.join(f'{i:.2f}' for i in force)}" for force in forces[self._atom_idx]]
+        write_string = "\t".join(write_list) + "\n"
+        self._out.write(write_string)
         self._out.flush()
 
 def save_free_energies(output_dir, meta):

@@ -165,7 +165,6 @@ def main(args, input_dict, ref_positions, output_dir):
         file=os.path.join(output_dir, "forces.txt"),
         reportInterval=params.traj_freq,
         force_group=pulling_params.force_group,
-        force_idx=force_idx
     ))
 
     print("Running simulation")

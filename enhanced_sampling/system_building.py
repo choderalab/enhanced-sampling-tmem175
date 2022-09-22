@@ -47,11 +47,20 @@ def load_input_dir(input_dir,
             ## get box size from sysinfo.dat
             x, y, z = load_xyz_from_datfile(os.path.join(input_dir, "sysinfo.dat"))
             psf.setBox(x, y, z)
+
+    elif positions == "pdbx":
+        state = None
+        input_pdb_path = os.path.join(input_dir, "final_frame.cif")
+        print(f"loading positions from {input_pdb_path}")
+        pdb = PDBxFile(input_pdb_path)
+        positions = pdb.positions
+
     else:
         state = None
         positions = None
+        pdb = None
 
-    return {"psf": psf, "params": params, "state": state, "positions": positions}
+    return {"psf": psf, "params": params, "state": state, "positions": positions, "pdb": pdb}
 
 
 def load_xyz_from_datfile(dat_file_path):

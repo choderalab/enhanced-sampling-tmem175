@@ -1,5 +1,5 @@
 import openmm, bz2, os
-from openmm.app import PDBxFile
+from openmm.app import PDBxFile, PDBFile
 
 def write_simulation_files(sim, output_dir):
     ## get state, system, integrator
@@ -16,7 +16,8 @@ def write_simulation_files(sim, output_dir):
     integrator = sim.context.getIntegrator()
 
     output_state_path = os.path.join(output_dir, 'state.xml.bz2')
-    output_pdb_path = os.path.join(output_dir, 'final_frame.cif')
+    output_cif_path = os.path.join(output_dir, 'final_frame.cif')
+    output_pdb_path = os.path.join(output_dir, 'final_frame.pdb')
     output_system_file = os.path.join(output_dir, 'system.xml.bz2')
     output_integrator_file = os.path.join(output_dir, 'integrator.xml.bz2')
 
@@ -29,8 +30,18 @@ def write_simulation_files(sim, output_dir):
 
     # Save the final state as a PDBx File
     print("Saving cif")
-    with open(output_pdb_path, "wt") as outfile:
+    with open(output_cif_path, "wt") as outfile:
         PDBxFile.writeFile(
+            sim.topology,
+            state.getPositions(),
+            file=outfile,
+            keepIds=True
+        )
+
+    # Save the final state as a PDB File
+    print("Saving pdb")
+    with open(output_pdb_path, "wt") as outfile:
+        PDBFile.writeFile(
             sim.topology,
             state.getPositions(),
             file=outfile,

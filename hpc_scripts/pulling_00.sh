@@ -5,7 +5,7 @@
 # Set output file
 #BSUB -o  %J.out
 
-#BUSB -J "pulling"
+#BSUB -J "pulling"
 
 # Set error file
 #BSUB -e %J.stderr

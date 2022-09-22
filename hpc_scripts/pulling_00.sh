@@ -11,7 +11,8 @@
 #BSUB -e %J.stderr
 
 # Specify node group
-#BSUB -R select[gpu_model0=='GeForceGTX2080']
+#BSUB -q gpuqueue
+#BSUB -R select[gpu_model0!='GeForceGTX1080']
 
 # nodes: number of nodes and GPU request
 #BSUB -n 1 -R "rusage[mem=8]"

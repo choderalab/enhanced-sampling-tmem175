@@ -133,6 +133,7 @@ class CustomForceReporter(object):
             # str(state.getForces().value_in_unit(unit.kilojoules / unit.mole / unit.nanometer)[0])
         ]
         self._out.write(self.get_formated_str(out_list))
+        self._out.flush()
 
     def get_formated_str(self, out_list):
         formated_list = [f"{item:30}" for item in out_list]
@@ -141,8 +142,8 @@ class CustomForceReporter(object):
 
     def write_header(self):
         header_list = [
-            "Potential Energy",
-            "Kinetic Energy",
+            "Potential Energy (kJ/mol)",
+            "Kinetic Energy (kJ/mol)",
             # "Forces"
         ]
         self._out.write(self.get_formated_str(header_list))

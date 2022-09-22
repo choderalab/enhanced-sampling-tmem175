@@ -192,8 +192,9 @@ def main(args, input_dict, ref_positions, output_dir):
 if __name__ == "__main__":
     args = get_args()
 
-    if not os.path.exists(args.output_dir):
-        os.mkdir(args.output_dir)
+    if os.path.exists(args.output_dir):
+        os.rmdir(args.output_dir)
+    os.mkdir(args.output_dir)
 
     logging.basicConfig(level=logging.DEBUG, format='%(message)s')
     logger = logging.getLogger()

@@ -4,8 +4,7 @@ import os, sys
 import openmm, mdtraj
 import openmm.app
 import logging
-
-import yaml
+import shutil
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
@@ -193,7 +192,7 @@ if __name__ == "__main__":
     args = get_args()
 
     if os.path.exists(args.output_dir):
-        os.rmdir(args.output_dir)
+        shutil.rmtree(args.output_dir)
     os.mkdir(args.output_dir)
 
     logging.basicConfig(level=logging.DEBUG, format='%(message)s')

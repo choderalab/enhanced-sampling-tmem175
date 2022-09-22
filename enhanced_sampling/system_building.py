@@ -6,7 +6,8 @@ from simtk import unit
 def load_input_dir(input_dir,
                    charmm_param_dir=None,
                    load_psf=True,
-                   from_state=True
+                   from_state=True,
+                   from_pdb=False
                    ):
     assert os.path.exists(input_dir)
 
@@ -35,6 +36,21 @@ def load_input_dir(input_dir,
             psf.setBox(x[0], y[1], z[2])
 
         positions = state.getPositions()
+    elif from_pdb:
+        state = None
+        input_pdb_path = os.path.join(input_dir, "step5_input.pdb")
+        pdb = PDBFile(input_pdb_path)
+        positions = pdb.positions
+
+        if load_psf:
+            ## get box size from sysinfo.dat
+            import json
+            sys_info_path = os.path.join(input_dir, "sysinfo.dat")
+
+            with open(sys_info_path) as file:
+                data = json.load(file)
+            x, y, z = map(float, data['dimensions'][:3]) * unit.angstroms
+            psf.setBox(x, y, z)
     else:
         state = None
         positions = None

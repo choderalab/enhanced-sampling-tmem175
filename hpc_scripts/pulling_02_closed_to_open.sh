@@ -12,7 +12,8 @@
 
 # Specify node group
 #BSUB -q gpuqueue
-#BSUB -R select[gpu_model0!='GeForceGTX1080']
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080']
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080Ti']
 
 # nodes: number of nodes and GPU request
 #BSUB -n 1 -R "rusage[mem=8]"

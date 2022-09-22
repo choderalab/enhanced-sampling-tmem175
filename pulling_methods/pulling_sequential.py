@@ -205,7 +205,7 @@ if __name__ == "__main__":
     utils.print_args(args)
 
     t = mdtraj.load(args.ebdims_file)
-    position_list = t.xyz[:2]
+    position_list = t.xyz
 
     input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir, position_source='state')
 

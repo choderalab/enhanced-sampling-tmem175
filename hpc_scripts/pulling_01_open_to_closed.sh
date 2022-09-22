@@ -21,4 +21,4 @@
 
 source ~/.bashrc
 conda activate enhanced-sampling-tmem175
-python ../pulling_methods/pulling_sequential.py -i ../systems/system00 -e ../systems/eBDims/open_to_closed_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/open_to_closed -p ../sim_params/pulling.yaml -y cas.yaml
+python ../pulling_methods/pulling_sequential.py -i ../systems/system00 -e ../systems/eBDims/open_to_closed_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/open_to_closed -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml

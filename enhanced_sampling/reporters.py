@@ -1,6 +1,7 @@
 import openmm.unit as unit
 import os
-import numpy, h5py
+import numpy
+# import h5py
 
 class CustomReporter(object):
     """

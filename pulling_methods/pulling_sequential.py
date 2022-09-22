@@ -163,9 +163,15 @@ def main(args, input_dict, ref_positions, output_dir):
 
     sim.reporters.append(reporters.CustomForceReporter(
         file=os.path.join(output_dir, "forces.txt"),
-        reportInterval=params.traj_freq,
+        reportInterval=params.report_freq,
         force_group=pulling_params.force_group,
         atom_idx=idx_list
+    ))
+
+    sim.reporters.append(reporters.CustomEnergyReporter(
+        file=os.path.join(output_dir, "energy.txt"),
+        reportInterval=params.report_freq,
+        force_group=pulling_params.force_group,
     ))
 
     print("Running simulation")

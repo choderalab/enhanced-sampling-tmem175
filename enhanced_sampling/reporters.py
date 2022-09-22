@@ -98,6 +98,7 @@ class CustomCVForceReporter(CustomReporter):
 class CustomEnergyReporter(CustomReporter):
 
     def __init__(self, file, reportInterval, force_group):
+        self._out = open(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
         self.header_list = [
@@ -121,8 +122,8 @@ class CustomEnergyReporter(CustomReporter):
                                             getEnergy=True,
                                             groups=self._force_group)
         out_list = [
-            state.getPotentialEnergy().format('%.2f'),
-            state.getKineticEnergy().format('%.2f'),
+            state.getPotentialEnergy().value_in_unit(unit.kilojoules_per_mole),
+            state.getKineticEnergy().value_in_unit(unit.kilojoules_per_mole),
         ]
         self._out.write(self.get_formated_str(out_list))
         self._out.flush()

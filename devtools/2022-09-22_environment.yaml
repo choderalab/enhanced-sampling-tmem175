@@ -17,4 +17,5 @@ dependencies:
   - openmmtools
   - matplotlib
   - plotly
+  - h5py
 prefix: /Users/alexpayne/opt/anaconda3/envs/enhanced-sampling-tmem175

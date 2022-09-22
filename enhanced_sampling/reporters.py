@@ -1,6 +1,6 @@
 import openmm.unit as unit
 import os
-import numpy
+import numpy, h5py
 
 class CustomReporter(object):
     """
@@ -98,7 +98,6 @@ class CustomCVForceReporter(CustomReporter):
 class CustomEnergyReporter(CustomReporter):
 
     def __init__(self, file, reportInterval, force_group):
-        self._out = open(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
         self.header_list = [
@@ -131,6 +130,9 @@ class CustomEnergyReporter(CustomReporter):
 class CustomForceReporter(CustomReporter):
     def __init__(self, file, reportInterval, force_group, atom_idx):
         self._out = open(file, 'w')
+        # with h5py.File(file, 'w') as f:
+        #     self._out = f.create_dataset('dataset')
+        # self._out = h5py.File(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
         self._atom_idx = atom_idx
@@ -150,7 +152,7 @@ class CustomForceReporter(CustomReporter):
                                             getEnergy=True,
                                             groups=self._force_group)
         forces = state.getForces(asNumpy=True).value_in_unit(unit.kilojoules_per_mole / unit.nanometer)
-        write_list = [f"{','.join(f'{i:.2f}' for i in force)}" for force in forces[self._atom_idx]]
+        write_list = ["\t".join(f'{i:.2f}' for i in force) for force in forces[self._atom_idx]]
         write_string = "\t".join(write_list) + "\n"
         self._out.write(write_string)
         self._out.flush()

@@ -108,3 +108,69 @@
   notes: ''
   script: pulling_sequential.py
   success: ''
+'2022-09-22T15:09:41.630334':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    ebdims_file: ../systems/eBDims/open_to_closed_superposed.pdb
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling/open_to_closed
+    params_file: ../sim_params/pulling_local.yaml
+    pulling_params: cas.yaml
+  notes: ''
+  script: pulling_sequential.py
+  success: ''
+'2022-09-22T15:12:03.106013':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    ebdims_file: ../systems/eBDims/open_to_closed_superposed.pdb
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling/open_to_closed
+    params_file: ../sim_params/pulling_local.yaml
+    pulling_params: cas.yaml
+  notes: ''
+  script: pulling_sequential.py
+  success: ''
+'2022-09-22T15:19:48.231047':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    ebdims_file: ../systems/eBDims/open_to_closed_superposed.pdb
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling/open_to_closed
+    params_file: ../sim_params/pulling_local.yaml
+    pulling_params: cas.yaml
+  notes: ''
+  script: pulling_sequential.py
+  success: ''
+'2022-09-22T15:22:17.859440':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    ebdims_file: ../systems/eBDims/open_to_closed_superposed.pdb
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling/open_to_closed
+    params_file: ../sim_params/pulling_local.yaml
+    pulling_params: cas.yaml
+  notes: ''
+  script: pulling_sequential.py
+  success: ''
+'2022-09-22T15:26:12.637594':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    ebdims_file: ../systems/eBDims/open_to_closed_superposed.pdb
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling/open_to_closed
+    params_file: ../sim_params/pulling_local.yaml
+    pulling_params: cas.yaml
+  notes: ''
+  script: pulling_sequential.py
+  success: ''
+'2022-09-22T15:28:40.315009':
+  args:
+    charmm_param_dir: ../forcefield_data/charmm-params
+    ebdims_file: ../systems/eBDims/open_to_closed_superposed.pdb
+    input_dir: ../systems/system00
+    output_dir: /Volumes/Rohirrim/local_test/enhanced_sampling/pulling/open_to_closed
+    params_file: ../sim_params/pulling_local.yaml
+    pulling_params: cas.yaml
+  notes: ''
+  script: pulling_sequential.py
+  success: ''

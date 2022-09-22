@@ -192,7 +192,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format='%(message)s')
     logger = logging.getLogger()
     logger.addHandler(logging.FileHandler(os.path.join(args.output_dir, "log.txt"), 'a'))
-    # sys.stderr.write = logger.error
     sys.stdout.write = logger.info
 
     print(f"Writing to {args.output_dir}")
@@ -202,7 +201,7 @@ if __name__ == "__main__":
     t = mdtraj.load(args.ebdims_file)
     position_list = t.xyz[:2]
 
-    input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir, positions='state')
+    input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir, position_source='state')
 
     new_input_dir = False
     for i in range(len(position_list)):
@@ -216,7 +215,7 @@ if __name__ == "__main__":
         if new_input_dir:
             new_input_dict = sb.load_input_dir(new_input_dir,
                                                load_psf=False,
-                                               positions="state",
+                                               position_source="state",
                                                )
             input_dict["state"] = new_input_dict["state"]
 

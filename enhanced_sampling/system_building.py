@@ -6,26 +6,28 @@ from simtk import unit
 def load_input_dir(input_dir,
                    charmm_param_dir=None,
                    load_psf=True,
-                   positions="state"
+                   position_source="state"
                    ):
     assert os.path.exists(input_dir)
+
+    psf = None
+    params = None
+    state = None
+    positions = None
+    pdb = None
 
     ## load psf
     if load_psf:
         psf_path = os.path.join(input_dir, "step5_input.psf")
         print(f"Loading psf from {psf_path}")
         psf = CharmmPsfFile(psf_path)
-    else:
-        psf = None
 
     if charmm_param_dir:
         print(f"Loading Charmm params from {charmm_param_dir}")
         param_paths = [os.path.join(charmm_param_dir, path) for path in os.listdir(charmm_param_dir)]
         params = CharmmParameterSet(*param_paths)
-    else:
-        params = None
 
-    if positions == "state":
+    if position_source == "state":
         input_state_path = os.path.join(input_dir, "state.xml.bz2")
         with bz2.open(input_state_path, 'rb') as infile:
             state = openmm.XmlSerializer.deserialize(infile.read().decode())
@@ -35,30 +37,23 @@ def load_input_dir(input_dir,
             psf.setBox(x[0], y[1], z[2])
 
         positions = state.getPositions()
-    elif positions == "pdb":
-        state = None
+    elif position_source == "pdb":
         input_pdb_path = os.path.join(input_dir, "step5_input.pdb")
         print(f"loading positions from {input_pdb_path}")
         pdb = PDBFile(input_pdb_path)
         positions = pdb.positions
 
-        if load_psf:
-            print(f"loading box vectors")
-            ## get box size from sysinfo.dat
-            x, y, z = load_xyz_from_datfile(os.path.join(input_dir, "sysinfo.dat"))
-            psf.setBox(x, y, z)
-
-    elif positions == "pdbx":
-        state = None
+    elif position_source == "pdbx":
         input_pdb_path = os.path.join(input_dir, "final_frame.cif")
         print(f"loading positions from {input_pdb_path}")
         pdb = PDBxFile(input_pdb_path)
         positions = pdb.positions
 
-    else:
-        state = None
-        positions = None
-        pdb = None
+    if load_psf and not position_source == "state":
+        print(f"loading box vectors")
+        ## get box size from sysinfo.dat
+        x, y, z = load_xyz_from_datfile(os.path.join(input_dir, "sysinfo.dat"))
+        psf.setBox(x, y, z)
 
     return {"psf": psf, "params": params, "state": state, "positions": positions, "pdb": pdb}
 

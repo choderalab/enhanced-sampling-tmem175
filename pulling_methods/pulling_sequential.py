@@ -36,7 +36,7 @@ def get_args():
     return args
 
 ## MAIN SCRIPT
-def main(restraint_positions):
+def main(ref_positions, new_input_dir = False):
     args = get_args()
     output_dir = utils.prep_output_dir(args.output_dir)
 
@@ -50,7 +50,12 @@ def main(restraint_positions):
 
     utils.print_args(args)
 
-    input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir)
+    if new_input_dir:
+        input_dir = new_input_dir
+    else:
+        input_dir = args.input_dir
+
+    input_dict = sb.load_input_dir(input_dir, args.charmm_param_dir)
     print(input_dict.keys())
     psf = input_dict["psf"]
     print(psf.topology)
@@ -92,6 +97,12 @@ def main(restraint_positions):
 
     ## Implement Enhanced Sampling here! ###############################################################################
     ####################################################################################################################
+    idx_list = cv.get_openmm_idx(psf.topology, selection=pulling_params.selection)
+
+    assert len(ref_positions) == len(idx_list)
+
+    restraint_positions = {idx_list[i]: ref_positions[i] for i in range(len(idx_list))}
+
     force = cv.create_harmonic_pulling_force(restraint_positions, pulling_params.spring_constant)
     force.setForceGroup(pulling_params.force_group)
 
@@ -172,16 +183,19 @@ def main(restraint_positions):
     utils.write_to_log(args,
                        os.path.basename(__file__))
 
+    return output_dir
+
 
 ## RUN COMMAND
 if __name__ == "__main__":
-    ref_dict = sb.load_input_dir(args.reference_dir, load_psf=False)
+    args = get_args()
 
-    ref_positions = ref_dict['positions']
+    t = mdtraj.load(args.ebdims_file)
+    position_list = t.xyz[:2]
 
-    assert len(ref_positions) == len(positions)
-
-    idx_list = cv.get_openmm_idx(psf.topology, selection=pulling_params.selection)
-
-    restraint_positions = {idx: ref_positions[idx] for idx in idx_list}
-    main()
+    new_input_dir = False
+    for i in range(len(position_list)):
+        print(f"Using positions from frame {i} from {args.ebdims_file}")
+        ref_positions = position_list[i]
+        new_input_dir = main(ref_positions, new_input_dir)
+        print(f"Trajectory info written to {new_input_dir}")

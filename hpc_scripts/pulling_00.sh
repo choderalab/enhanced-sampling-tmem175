@@ -24,6 +24,6 @@ conda activate enhanced-sampling-tmem175
 #python ../pulling_methods/pulling.py -i ../systems/system01 -r ../systems/system00 -o ../../enhanced-sampling-tmem175-data/pulling -y ../pulling_methods/cas.yaml
 #python ../pulling_methods/pulling.py -i ../systems/system00 -r ../systems/system01 -o ../../enhanced-sampling-tmem175-data/pulling -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml
 #python ../pulling_methods/pulling.py -i ../systems/system01 -r ../systems/system00 -o ../../enhanced-sampling-tmem175-data/pulling -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml
-python ../pulling_methods/pulling_sequential.py -i ../systems/system00 -e ../systems/eBDims/open_to_closed_superposed.pdb -o ../../enhanced-sampling-tmem175-data/pulling/open_to_closed -p ../sim_params/pulling.yaml -y cas.yaml
-python ../pulling_methods/pulling_sequential.py -i ../systems/system01 -e ../systems/eBDims/closed_to_open_superposed.pdb -o ../../enhanced-sampling-tmem175-data/pulling/closed_to_open -p ../sim_params/pulling.yaml -y cas.yaml
+python ../pulling_methods/pulling_sequential.py -i ../systems/system00 -e ../systems/eBDims/open_to_closed_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/open_to_closed -p ../sim_params/pulling.yaml -y cas.yaml
+python ../pulling_methods/pulling_sequential.py -i ../systems/system01 -e ../systems/eBDims/closed_to_open_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/closed_to_open -p ../sim_params/pulling.yaml -y cas.yaml
 

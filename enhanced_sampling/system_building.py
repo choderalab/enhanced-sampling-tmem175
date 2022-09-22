@@ -6,8 +6,7 @@ from simtk import unit
 def load_input_dir(input_dir,
                    charmm_param_dir=None,
                    load_psf=True,
-                   from_state=True,
-                   from_pdb=False
+                   positions="state"
                    ):
     assert os.path.exists(input_dir)
 
@@ -26,7 +25,7 @@ def load_input_dir(input_dir,
     else:
         params = None
 
-    if from_state:
+    if positions == "state":
         input_state_path = os.path.join(input_dir, "state.xml.bz2")
         with bz2.open(input_state_path, 'rb') as infile:
             state = openmm.XmlSerializer.deserialize(infile.read().decode())
@@ -36,20 +35,17 @@ def load_input_dir(input_dir,
             psf.setBox(x[0], y[1], z[2])
 
         positions = state.getPositions()
-    elif from_pdb:
+    elif positions == "pdb":
         state = None
         input_pdb_path = os.path.join(input_dir, "step5_input.pdb")
+        print(f"loading positions from {input_pdb_path}")
         pdb = PDBFile(input_pdb_path)
         positions = pdb.positions
 
         if load_psf:
+            print(f"loading box vectors")
             ## get box size from sysinfo.dat
-            import json
-            sys_info_path = os.path.join(input_dir, "sysinfo.dat")
-
-            with open(sys_info_path) as file:
-                data = json.load(file)
-            x, y, z = map(float, data['dimensions'][:3]) * unit.angstroms
+            x, y, z = load_xyz_from_datfile(os.path.join(input_dir, "sysinfo.dat"))
             psf.setBox(x, y, z)
     else:
         state = None

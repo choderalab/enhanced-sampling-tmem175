@@ -35,27 +35,9 @@ def get_args():
     args = parser.parse_args()
     return args
 
+
 ## MAIN SCRIPT
-def main(ref_positions, new_input_dir = False):
-    args = get_args()
-    output_dir = utils.prep_output_dir(args.output_dir)
-
-    logging.basicConfig(level=logging.DEBUG, format='%(message)s')
-    logger = logging.getLogger()
-    logger.addHandler(logging.FileHandler(os.path.join(output_dir, "log.txt"), 'a'))
-    # sys.stderr.write = logger.error
-    sys.stdout.write = logger.info
-
-    print(f"Writing to {output_dir}")
-
-    utils.print_args(args)
-
-    if new_input_dir:
-        input_dir = new_input_dir
-    else:
-        input_dir = args.input_dir
-
-    input_dict = sb.load_input_dir(input_dir, args.charmm_param_dir)
+def main(args, input_dict, ref_positions, output_dir):
     print(input_dict.keys())
     psf = input_dict["psf"]
     print(psf.topology)
@@ -65,7 +47,6 @@ def main(ref_positions, new_input_dir = False):
     print(params)
     pulling_params = schema.PullingParams(args.pulling_params)
     print(pulling_params)
-
     system = psf.createSystem(input_dict["params"],
                               nonbondedMethod=params.nonbonded_method,
                               constraints=params.constraints,
@@ -121,14 +102,29 @@ def main(ref_positions, new_input_dir = False):
                                 platform=platform)
 
     ## Set state (positions, box vectors, velocities)
-    sim.context.setState(input_dict["state"])
+    if input_dict["state"]:
+        print(f"Setting state from state file...")
+        sim.context.setState(input_dict["state"])
+    elif input_dict["positions"]:
+        print(f"Setting positions and velocities...")
+        sim.context.setPositions(input_dict['positions'])
+        sim.context.setVelocitiesToTemperature(params.temperature)
+        print(
+            "  before minimization : %8.3f kcal/mol"
+            % (
+                    sim.context.getState(getEnergy=True).getPotentialEnergy()
+                    / openmm.unit.kilocalories_per_mole
+            )
+        )
+        sim.minimizeEnergy()
+
 
     ## reset time and step count to 0
     sim.context.setTime(0)
     sim.context.setStepCount(0)
 
     print(
-        "  initial : %8.3f kcal/mol"
+        "  before simulation : %8.3f kcal/mol"
         % (
                 sim.context.getState(getEnergy=True).getPotentialEnergy()
                 / openmm.unit.kilocalories_per_mole
@@ -190,12 +186,43 @@ def main(ref_positions, new_input_dir = False):
 if __name__ == "__main__":
     args = get_args()
 
+    if not os.path.exists(args.output_dir):
+        os.mkdir(args.output_dir)
+
+    logging.basicConfig(level=logging.DEBUG, format='%(message)s')
+    logger = logging.getLogger()
+    logger.addHandler(logging.FileHandler(os.path.join(args.output_dir, "log.txt"), 'a'))
+    # sys.stderr.write = logger.error
+    sys.stdout.write = logger.info
+
+    print(f"Writing to {args.output_dir}")
+
+    utils.print_args(args)
+
     t = mdtraj.load(args.ebdims_file)
     position_list = t.xyz[:2]
+
+    input_dict = sb.load_input_dir(args.input_dir, args.charmm_param_dir, positions='state')
 
     new_input_dir = False
     for i in range(len(position_list)):
         print(f"Using positions from frame {i} from {args.ebdims_file}")
         ref_positions = position_list[i]
-        new_input_dir = main(ref_positions, new_input_dir)
+
+        output_dir = os.path.join(args.output_dir, f"frame{i:02d}")
+        os.mkdir(output_dir)
+        print(f"Writing to {output_dir}")
+
+        if new_input_dir:
+            new_input_dict = sb.load_input_dir(new_input_dir,
+                                               load_psf=False,
+                                               positions="state",
+                                               )
+            input_dict["state"] = new_input_dict["state"]
+
+        new_input_dir = main(args=args,
+                             input_dict=input_dict,
+                             ref_positions=ref_positions,
+                             output_dir=output_dir
+                             )
         print(f"Trajectory info written to {new_input_dir}")

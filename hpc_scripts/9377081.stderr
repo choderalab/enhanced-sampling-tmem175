@@ -1,0 +1,120 @@
+Writing to ../../enhanced-sampling-tmem175-data/pulling/01.open_to_closed
+
+
+input_dir: ../systems/system00
+
+
+ebdims_file: ../systems/eBDims/open_to_closed_superposed_to_final.pdb
+
+
+output_dir: ../../enhanced-sampling-tmem175-data/pulling/01.open_to_closed
+
+
+charmm_param_dir: ../forcefield_data/charmm-params
+
+
+params_file: ../sim_params/pulling.yaml
+
+
+pulling_params: ../pulling_methods/cas.yaml
+
+
+Loading psf from ../systems/system00/step5_input.psf
+
+
+Loading Charmm params from ../forcefield_data/charmm-params
+
+
+Using positions from frame 0 from ../systems/eBDims/open_to_closed_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/01.open_to_closed/frame00
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -319403.785 kcal/mol
+
+
+Running simulation
+
+
+Traceback (most recent call last):
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts/../pulling_methods/pulling_sequential.py", line 228, in <module>
+    new_input_dir = main(args=args,
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts/../pulling_methods/pulling_sequential.py", line 177, in main
+    sim.step(params.n_steps)
+  File "/home/paynea/miniconda3/envs/enhanced-sampling-tmem175/lib/python3.9/site-packages/openmm/app/simulation.py", line 141, in step
+    self._simulate(endStep=self.currentStep+steps)
+  File "/home/paynea/miniconda3/envs/enhanced-sampling-tmem175/lib/python3.9/site-packages/openmm/app/simulation.py", line 206, in _simulate
+    self.integrator.step(10) # Only take 10 steps at a time, to give Python more chances to respond to a control-c.
+  File "/home/paynea/miniconda3/envs/enhanced-sampling-tmem175/lib/python3.9/site-packages/openmm/openmm.py", line 6145, in step
+    return _openmm.LangevinMiddleIntegrator_step(self, steps)
+KeyboardInterrupt

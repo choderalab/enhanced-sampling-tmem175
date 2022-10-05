@@ -5,7 +5,7 @@
 # Set output file
 #BSUB -o  %J.out
 
-#BUSB -J "open_to_closed"
+#BSUB -J "closed_to_open"
 
 # Set error file
 #BSUB -e %J.stderr

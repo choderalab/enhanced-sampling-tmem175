@@ -1,0 +1,68 @@
+Sender: LSF System <lsfadmin@lu03>
+Subject: Job 9377105: <#!/usr/bin/env bash;# Set walltime limit;#BSUB -W 24:00; # Set output file;#BSUB -o  %J.out; #BUSB -J "closed_to_open"; # Set error file;#BSUB -e %J.stderr; # Specify node group;#BSUB -q gpuqueue;#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080'];#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080Ti']; # nodes: number of nodes and GPU request;#BSUB -n 1 -R "rusage[mem=8]";#BSUB -gpu "num=1:j_exclusive=yes:mode=shared";  source ~/.bashrc;conda activate enhanced-sampling-tmem175;python ../pulling_methods/pulling_sequential.py -i ../systems/system01 -e ../systems/eBDims/closed_to_open_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml> in cluster <lila> Exited
+
+Job <#!/usr/bin/env bash;# Set walltime limit;#BSUB -W 24:00; # Set output file;#BSUB -o  %J.out; #BUSB -J "closed_to_open"; # Set error file;#BSUB -e %J.stderr; # Specify node group;#BSUB -q gpuqueue;#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080'];#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080Ti']; # nodes: number of nodes and GPU request;#BSUB -n 1 -R "rusage[mem=8]";#BSUB -gpu "num=1:j_exclusive=yes:mode=shared";  source ~/.bashrc;conda activate enhanced-sampling-tmem175;python ../pulling_methods/pulling_sequential.py -i ../systems/system01 -e ../systems/eBDims/closed_to_open_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml> was submitted from host <lilac-ln02> by user <paynea> in cluster <lila> at Thu Sep 22 10:50:03 2022
+Job was executed on host(s) <lu03>, in queue <gpuqueue>, as user <paynea> in cluster <lila> at Thu Sep 22 12:16:31 2022
+</home/paynea> was used as the home directory.
+</data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts> was used as the working directory.
+Started at Thu Sep 22 12:16:31 2022
+Terminated at Fri Sep 23 12:16:36 2022
+Results reported at Fri Sep 23 12:16:36 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/usr/bin/env bash
+# Set walltime limit
+#BSUB -W 24:00
+
+# Set output file
+#BSUB -o  %J.out
+
+#BUSB -J "closed_to_open"
+
+# Set error file
+#BSUB -e %J.stderr
+
+# Specify node group
+#BSUB -q gpuqueue
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080']
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080Ti']
+
+# nodes: number of nodes and GPU request
+#BSUB -n 1 -R "rusage[mem=8]"
+#BSUB -gpu "num=1:j_exclusive=yes:mode=shared"
+
+
+source ~/.bashrc
+conda activate enhanced-sampling-tmem175
+python ../pulling_methods/pulling_sequential.py -i ../systems/system01 -e ../systems/eBDims/closed_to_open_superposed_to_final.pdb -o ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open -p ../sim_params/pulling.yaml -y ../pulling_methods/cas.yaml
+
+
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time :                                   83082.00 sec.
+    Max Memory :                                 5 GB
+    Average Memory :                             3.25 GB
+    Total Requested Memory :                     8.00 GB
+    Delta Memory :                               3.00 GB
+    Max Swap :                                   -
+    Max Processes :                              6
+    Max Threads :                                308
+    Run time :                                   86405 sec.
+    Turnaround time :                            91593 sec.
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <9377105.stderr> for stderr output of this job.
+

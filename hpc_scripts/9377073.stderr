@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts/../pulling_methods/pulling_sequential.py", line 196, in <module>
+    os.rmdir(args.output_dir)
+OSError: [Errno 39] Directory not empty: '../../enhanced-sampling-tmem175-data/pulling/open_to_closed'

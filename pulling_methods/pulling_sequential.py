@@ -272,6 +272,7 @@ if __name__ == "__main__":
     if args.restart_from_frame:
         frames = range(len(position_list))[args.restart_from_frame + 1 :]
         new_input_dir = args.restart_dir
+        print(f"Restarting from {new_input_dir} using frames {frames}")
     else:
         frames = range(len(position_list))
         new_input_dir = None

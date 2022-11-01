@@ -66,6 +66,12 @@ def get_args():
         default=None,
         help="Frame being used to restart the pulling simulations.",
     )
+    parser.add_argument(
+        "-r",
+        "--restart_dir",
+        type=str,
+        help="Restart input directory. Assumed to contain the state file for restarting",
+    )
     args = parser.parse_args()
     return args
 
@@ -262,17 +268,14 @@ if __name__ == "__main__":
         args.input_dir, args.charmm_param_dir, position_source="state"
     )
 
-    new_input_dir = (
-        os.path.join(args.output_dir, f"frame{args.restart_from_frame}")
-        if args.restart_from_frame
-        else False
-    )
+    ## options for if we're restarting from a frame
+    if args.restart_from_frame:
+        frames = range(len(position_list))[args.restart_from_frame + 1 :]
+        new_input_dir = args.restart_dir
+    else:
+        frames = range(len(position_list))
+        new_input_dir = None
 
-    frames = (
-        range(len(position_list))[args.restart_from_frame :]
-        if args.restart_from_frame
-        else range(len(position_list))
-    )
     for i in frames:
         print(f"Using positions from frame {i} from {args.ebdims_file}")
         ref_positions = position_list[i]

@@ -19,7 +19,6 @@
 #BSUB -n 1 -R "rusage[mem=8]"
 #BSUB -gpu "num=1:j_exclusive=yes:mode=shared"
 
-
 source ~/.bashrc
 conda activate enhanced-sampling-tmem175
 #python ../pulling_methods/pulling_sequential.py \
@@ -35,4 +34,5 @@ python ../pulling_methods/pulling_sequential.py \
 -o ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open_restart \
 -p ../sim_params/pulling02.yaml \
 -y ../pulling_methods/cas.yaml \
+-r ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open/frame40/
 --restart_from_frame 40

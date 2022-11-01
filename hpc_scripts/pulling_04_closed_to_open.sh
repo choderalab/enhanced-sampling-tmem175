@@ -30,7 +30,7 @@ conda activate enhanced-sampling-tmem175
 #-y ../pulling_methods/cas.yaml
 
 python ../pulling_methods/pulling_sequential.py \
--i ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open/frame40 \
+-i ../systems/system01 \
 -e ../systems/eBDims/closed_to_open_superposed_to_final.pdb \
 -o ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open_restart \
 -p ../sim_params/pulling02.yaml \

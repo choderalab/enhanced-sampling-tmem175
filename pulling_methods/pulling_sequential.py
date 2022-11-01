@@ -262,9 +262,14 @@ if __name__ == "__main__":
         args.input_dir, args.charmm_param_dir, position_source="state"
     )
 
-    new_input_dir = args.input_dir if args.restart_from_frame else False
+    new_input_dir = (
+        os.path.join(args.output_dir, f"frame{args.restart_from_frame}")
+        if args.restart_from_frame
+        else False
+    )
+
     frames = (
-        range(len(position_list))[args.restart_from_frame:]
+        range(len(position_list))[args.restart_from_frame :]
         if args.restart_from_frame
         else range(len(position_list))
     )

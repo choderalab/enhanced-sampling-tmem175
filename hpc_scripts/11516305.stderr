@@ -1,0 +1,37 @@
+Writing to ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open_restart
+
+
+input_dir: ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open/frame40
+
+
+ebdims_file: ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+output_dir: ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open_restart
+
+
+charmm_param_dir: ../forcefield_data/charmm-params
+
+
+params_file: ../sim_params/pulling02.yaml
+
+
+pulling_params: ../pulling_methods/cas.yaml
+
+
+restart_from_frame: 40
+
+
+Loading psf from ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open/frame40/step5_input.psf
+
+
+Traceback (most recent call last):
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts/../pulling_methods/pulling_sequential.py", line 261, in <module>
+    input_dict = sb.load_input_dir(
+  File "/lila/data/chodera/paynea/enhanced-sampling-tmem175/enhanced_sampling/system_building.py", line 23, in load_input_dir
+    psf = CharmmPsfFile(psf_path)
+  File "/home/paynea/miniconda3/envs/enhanced-sampling-tmem175/lib/python3.9/site-packages/openmm/app/charmmpsffile.py", line 73, in newfunc
+    return func(*args, **kwargs)
+  File "/home/paynea/miniconda3/envs/enhanced-sampling-tmem175/lib/python3.9/site-packages/openmm/app/charmmpsffile.py", line 192, in __init__
+    raise IOError('Could not find PSF file %s' % psf_name)
+OSError: Could not find PSF file ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open/frame40/step5_input.psf

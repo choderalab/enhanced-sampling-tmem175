@@ -1,0 +1,79 @@
+Sender: LSF System <lsfadmin@ln05>
+Subject: Job 11516330: <closed_to_open> in cluster <lila> Exited
+
+Job <closed_to_open> was submitted from host <lilac-ln02> by user <paynea> in cluster <lila> at Tue Nov  1 15:41:37 2022
+Job was executed on host(s) <ln05>, in queue <gpuqueue>, as user <paynea> in cluster <lila> at Tue Nov  1 15:41:38 2022
+</home/paynea> was used as the home directory.
+</data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts> was used as the working directory.
+Started at Tue Nov  1 15:41:38 2022
+Terminated at Tue Nov  1 15:42:01 2022
+Results reported at Tue Nov  1 15:42:01 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/usr/bin/env bash
+# Set walltime limit
+#BSUB -W 48:00
+
+# Set output file
+#BSUB -o  %J.out
+
+#BSUB -J "closed_to_open"
+
+# Set error file
+#BSUB -e %J.stderr
+
+# Specify node group
+#BSUB -q gpuqueue
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080']
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080Ti']
+
+# nodes: number of nodes and GPU request
+#BSUB -n 1 -R "rusage[mem=8]"
+#BSUB -gpu "num=1:j_exclusive=yes:mode=shared"
+
+
+source ~/.bashrc
+conda activate enhanced-sampling-tmem175
+#python ../pulling_methods/pulling_sequential.py \
+#-i ../systems/system01 \
+#-e ../systems/eBDims/closed_to_open_superposed_to_final.pdb \
+#-o ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open \
+#-p ../sim_params/pulling02.yaml \
+#-y ../pulling_methods/cas.yaml
+
+python ../pulling_methods/pulling_sequential.py \
+-i ../systems/system01 \
+-e ../systems/eBDims/closed_to_open_superposed_to_final.pdb \
+-o ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open_restart \
+-p ../sim_params/pulling02.yaml \
+-y ../pulling_methods/cas.yaml \
+--restart_from_frame 40
+
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   13.91 sec.
+    Max Memory :                                 1 GB
+    Average Memory :                             0.38 GB
+    Total Requested Memory :                     8.00 GB
+    Delta Memory :                               7.00 GB
+    Max Swap :                                   -
+    Max Processes :                              5
+    Max Threads :                                6
+    Run time :                                   23 sec.
+    Turnaround time :                            24 sec.
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <11516330.stderr> for stderr output of this job.
+

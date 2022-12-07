@@ -1,0 +1,73 @@
+Sender: LSF System <lsfadmin@lu05>
+Subject: Job 11381731: <closed_to_open> in cluster <lila> Exited
+
+Job <closed_to_open> was submitted from host <lilac-ln02> by user <paynea> in cluster <lila> at Wed Oct 26 15:19:46 2022
+Job was executed on host(s) <lu05>, in queue <gpuqueue>, as user <paynea> in cluster <lila> at Wed Oct 26 15:24:17 2022
+</home/paynea> was used as the home directory.
+</data/chodera/paynea/enhanced-sampling-tmem175/hpc_scripts> was used as the working directory.
+Started at Wed Oct 26 15:24:17 2022
+Terminated at Fri Oct 28 15:24:20 2022
+Results reported at Fri Oct 28 15:24:20 2022
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/usr/bin/env bash
+# Set walltime limit
+#BSUB -W 48:00
+
+# Set output file
+#BSUB -o  %J.out
+
+#BSUB -J "closed_to_open"
+
+# Set error file
+#BSUB -e %J.stderr
+
+# Specify node group
+#BSUB -q gpuqueue
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080']
+#BSUB -R select[gpu_model0!='NVIDIAGeForceGTX1080Ti']
+
+# nodes: number of nodes and GPU request
+#BSUB -n 1 -R "rusage[mem=8]"
+#BSUB -gpu "num=1:j_exclusive=yes:mode=shared"
+
+
+source ~/.bashrc
+conda activate enhanced-sampling-tmem175
+python ../pulling_methods/pulling_sequential.py \
+-i ../systems/system01 \
+-e ../systems/eBDims/closed_to_open_superposed_to_final.pdb \
+-o ../../enhanced-sampling-tmem175-data/pulling/04.closed_to_open \
+-p ../sim_params/pulling02.yaml \
+-y ../pulling_methods/cas.yaml
+
+
+------------------------------------------------------------
+
+TERM_RUNLIMIT: job killed after reaching LSF run time limit.
+Exited with exit code 140.
+
+Resource usage summary:
+
+    CPU time :                                   166887.00 sec.
+    Max Memory :                                 5 GB
+    Average Memory :                             3.32 GB
+    Total Requested Memory :                     8.00 GB
+    Delta Memory :                               3.00 GB
+    Max Swap :                                   -
+    Max Processes :                              6
+    Max Threads :                                310
+    Run time :                                   172803 sec.
+    Turnaround time :                            173074 sec.
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <11381731.stderr> for stderr output of this job.
+

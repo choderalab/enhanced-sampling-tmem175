@@ -1,0 +1,12 @@
+name: enhanced-sampling-tmem175
+channels:
+  - conda-forge
+  - omnia
+  - defaults
+dependencies:
+  - numpy
+  - openmm
+  - mdtraj
+  - pyyaml
+  - python=3.9
+prefix: /home/paynea/miniconda3/envs/enhanced-sampling-tmem175

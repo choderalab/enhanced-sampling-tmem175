@@ -1,0 +1,4213 @@
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open
+
+
+input_dir: ../systems/system01
+
+
+ebdims_file: ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+output_dir: ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open
+
+
+charmm_param_dir: ../forcefield_data/charmm-params
+
+
+params_file: ../sim_params/pulling.yaml
+
+
+pulling_params: ../pulling_methods/cas.yaml
+
+
+Loading psf from ../systems/system01/step5_input.psf
+
+
+Loading Charmm params from ../forcefield_data/charmm-params
+
+
+Using positions from frame 0 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame00
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -319147.058 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame00
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame00
+
+
+Using positions from frame 1 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame01
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322929.119 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame01
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame01
+
+
+Using positions from frame 2 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame02
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322886.478 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame02
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame02
+
+
+Using positions from frame 3 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame03
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -323312.485 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame03
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame03
+
+
+Using positions from frame 4 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame04
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -323044.090 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame04
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame04
+
+
+Using positions from frame 5 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame05
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322649.520 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame05
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame05
+
+
+Using positions from frame 6 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame06
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -323346.172 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame06
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame06
+
+
+Using positions from frame 7 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame07
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -323176.015 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame07
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame07
+
+
+Using positions from frame 8 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame08
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322381.366 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame08
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame08
+
+
+Using positions from frame 9 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame09
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322387.982 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame09
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame09
+
+
+Using positions from frame 10 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame10
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322747.061 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame10
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame10
+
+
+Using positions from frame 11 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame11
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322636.621 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame11
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame11
+
+
+Using positions from frame 12 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame12
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322844.164 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame12
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame12
+
+
+Using positions from frame 13 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame13
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322800.771 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame13
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame13
+
+
+Using positions from frame 14 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame14
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322341.289 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame14
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame14
+
+
+Using positions from frame 15 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame15
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322707.867 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame15
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame15
+
+
+Using positions from frame 16 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame16
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322917.098 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame16
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame16
+
+
+Using positions from frame 17 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame17
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322685.916 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame17
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame17
+
+
+Using positions from frame 18 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame18
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322415.924 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame18
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame18
+
+
+Using positions from frame 19 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame19
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322362.279 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame19
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame19
+
+
+Using positions from frame 20 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame20
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322058.631 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame20
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame20
+
+
+Using positions from frame 21 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame21
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322415.812 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame21
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame21
+
+
+Using positions from frame 22 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame22
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322401.382 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame22
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame22
+
+
+Using positions from frame 23 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame23
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322848.766 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame23
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame23
+
+
+Using positions from frame 24 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame24
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322614.176 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame24
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame24
+
+
+Using positions from frame 25 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame25
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322657.044 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame25
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame25
+
+
+Using positions from frame 26 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame26
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322723.172 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame26
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame26
+
+
+Using positions from frame 27 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame27
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -321858.123 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame27
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame27
+
+
+Using positions from frame 28 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame28
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322840.205 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame28
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame28
+
+
+Using positions from frame 29 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame29
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322198.451 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame29
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame29
+
+
+Using positions from frame 30 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame30
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322379.379 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame30
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame30
+
+
+Using positions from frame 31 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame31
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -323012.538 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame31
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame31
+
+
+Using positions from frame 32 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame32
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322763.332 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame32
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame32
+
+
+Using positions from frame 33 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame33
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322528.152 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame33
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame33
+
+
+Using positions from frame 34 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame34
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322494.477 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame34
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame34
+
+
+Using positions from frame 35 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame35
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322789.663 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame35
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame35
+
+
+Using positions from frame 36 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame36
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322454.427 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame36
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame36
+
+
+Using positions from frame 37 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame37
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322357.087 kcal/mol
+
+
+Running simulation
+
+
+Writing simulation files to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame37
+
+
+Saving state
+
+
+Saving cif
+
+
+Saving pdb
+
+
+Saving system
+
+
+Saving integrator
+
+
+Script cleanup
+
+
+Writing log
+
+
+Trajectory info written to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame37
+
+
+Using positions from frame 38 from ../systems/eBDims/closed_to_open_superposed_to_final.pdb
+
+
+Writing to ../../enhanced-sampling-tmem175-data/pulling/02.closed_to_open/frame38
+
+
+dict_keys(['psf', 'params', 'state', 'positions', 'pdb'])
+
+
+<Topology; 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Loading sim_params from ../sim_params/pulling.yaml
+
+
+hydrogen_mass       : 4.0 Da
+temperature         : 303.15 K
+friction            : 1 /ps
+time_step           : 0.002 ps
+pressure            : 1 bar
+surface_tension     : 0
+n_steps             : 500000
+report_freq         : 500
+chk_freq            : 250000
+traj_freq           : 5000
+virtual_bond        : ['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+platform            : CUDA
+precision           : mixed
+nonbonded_method    : PME
+constraints         : HBonds
+steps_dict          : {'Total Time': 500000, 'Report Freq': 500, 'Checkpoint Freq': 250000, 'Trajectory Freq': 5000}
+time_dict           : {'Total Time': Quantity(value=1000.0, unit=picosecond), 'Report Freq': Quantity(value=1.0, unit=picosecond), 'Checkpoint Freq': Quantity(value=500.0, unit=picosecond), 'Trajectory Freq': Quantity(value=10.0, unit=picosecond)}
+n_frames            : 100
+Total Time          :	1.00 ns             1000.00 ps          1000000.00 fs       
+Report Freq         :	0.00 ns             1.00 ps             1000.00 fs          
+Checkpoint Freq     :	0.50 ns             500.00 ps           500000.00 fs        
+Trajectory Freq     :	0.01 ns             10.00 ps            10000.00 fs         
+Number of Frames    :	100
+Number of Steps     :	500000
+
+
+Loading sim_params from ../pulling_methods/cas.yaml
+
+
+spring_constant     : 1000
+force_group         : 20
+selection           : protein_ca
+
+
+['resSeq 46 and name CA and chainid 0', 'resSeq 46 and name CA and chainid 1']
+
+
+<mdtraj.Topology with 5 chains, 31576 residues, 151920 atoms, 121416 bonds>
+
+
+Setting precision to mixed
+
+
+Setting DeterministicForces to 'true`
+
+
+Using protein selection: protein_ca and res_list: False
+
+
+Adding CustomExternalForce to system with 894 particles
+
+
+CustomExternalForce
+ 
+20
+
+
+Setting state from state file...
+
+
+  before simulation : -322744.985 kcal/mol
+
+
+Running simulation
+
+
+User defined signal 2

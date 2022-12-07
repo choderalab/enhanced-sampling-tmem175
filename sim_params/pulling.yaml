@@ -1,0 +1,22 @@
+hydrogen_mass: 4.0 # unit.amu
+temperature: 303.15 # unit.kelvin
+friction: 1 # per unit.picoseconds
+time_step: 0.002 # unit.picoseconds
+pressure: 1 # unit.bar
+surface_tension: 0  # units are complicated
+
+## fetched from openmm.app
+nonbonded_method: "PME"
+constraints: "HBonds"
+
+n_steps: 500000
+report_freq: 500
+chk_freq: 250000
+traj_freq: 5000
+
+virtual_bond:
+  - resSeq 46 and name CA and chainid 0   # mdtraj selection syntax
+  - resSeq 46 and name CA and chainid 1
+
+platform: CUDA
+precision: mixed

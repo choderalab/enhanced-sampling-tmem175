@@ -1,16 +1,16 @@
 import openmm.unit as unit
 import os
 import numpy
+# import h5py
 
-
-class MetadynamicsReporter():
-    def __init__(self, collective_variable_file, reportInterval, meta):
-        self._collective_variable_file = open(collective_variable_file, 'w')
-        self._reportInterval = reportInterval
-        self._meta = meta
+class CustomReporter(object):
+    """
+    From <http://docs.openmm.org/latest/userguide/application/
+    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
+    """
 
     def __del__(self):
-        self._collective_variable_file.close()
+        self._out.close()
 
     def describeNextReport(self, simulation):
         """
@@ -33,7 +33,23 @@ class MetadynamicsReporter():
         If None, it will automatically decide whether to wrap positions based on whether
         the System uses periodic boundary conditions.
         """
+        pass
 
+    def get_formated_str(self, out_list):
+        formated_list = [f"{item:30}" for item in out_list]
+        out_str = "\t".join(formated_list) + "\n"
+        return out_str
+
+    def write_header(self):
+        self._out.write(self.get_formated_str(self.header_list))
+
+class MetadynamicsReporter(CustomReporter):
+    def __init__(self, collective_variable_file, reportInterval, meta):
+        self._out = open(collective_variable_file, 'w')
+        self._reportInterval = reportInterval
+        self._meta = meta
+
+    def describeNextReport(self, simulation):
         steps = self._reportInterval - simulation.currentStep % self._reportInterval
         return (steps, False, False, False, False, None)
 
@@ -44,17 +60,14 @@ class MetadynamicsReporter():
         self._collective_variable_file.write(f"{cv_str}\n")
 
 
-class CustomCVForceReporter(object):
-    """
-    From <http://docs.openmm.org/latest/userguide/application/
-    04_advanced_sim_examples.html#extracting-and-reporting-forces-and-other-data>
-    """
+class CustomCVForceReporter(CustomReporter):
 
     def __init__(self, file, reportInterval, force_group, force_idx):
         self._out = open(file, 'w')
         self._reportInterval = reportInterval
         self._force_group = force_group
         self._force_idx = force_idx
+        self.header_list = ["Potential Energy", "Kinetic Energy", "CustomCV", "Forces"]
         self.write_header()
 
         ## Since I don't think I will every use bitmaps for this, enforce this to be a set
@@ -62,9 +75,6 @@ class CustomCVForceReporter(object):
             self._force_group = {self._force_group}
         elif type(self._force_group) == list:
             self._force_group = set(self._force_group)
-
-    def __del__(self):
-        self._out.close()
 
     def describeNextReport(self, simulation):
         steps = self._reportInterval - simulation.currentStep % self._reportInterval
@@ -83,16 +93,71 @@ class CustomCVForceReporter(object):
                     str(state.getForces().value_in_unit(unit.kilojoules / unit.mole / unit.nanometer)[0])
                     ]
         self._out.write(self.get_formated_str(out_list))
+        self._out.flush()
 
-    def get_formated_str(self, out_list):
-        formated_list = [f"{item:30}" for item in out_list]
-        out_str = "\t".join(formated_list) + "\n"
-        return out_str
 
-    def write_header(self):
-        header_list = ["Potential Energy", "Kinetic Energy", "CustomCV", "Forces"]
-        self._out.write(self.get_formated_str(header_list))
+class CustomEnergyReporter(CustomReporter):
 
+    def __init__(self, file, reportInterval, force_group):
+        self._out = open(file, 'w')
+        self._reportInterval = reportInterval
+        self._force_group = force_group
+        self.header_list = [
+            "Potential Energy (kJ/mol)",
+            "Kinetic Energy (kJ/mol)",
+        ]
+        self.write_header()
+
+        ## Since I don't think I will every use bitmaps for this, enforce this to be a set
+        if type(self._force_group) == int:
+            self._force_group = {self._force_group}
+        elif type(self._force_group) == list:
+            self._force_group = set(self._force_group)
+
+    def describeNextReport(self, simulation):
+        steps = self._reportInterval - simulation.currentStep % self._reportInterval
+        return (steps, False, False, False, False, None)
+
+    def report(self, simulation, state):
+        state = simulation.context.getState(getForces=True,
+                                            getEnergy=True,
+                                            groups=self._force_group)
+        out_list = [
+            state.getPotentialEnergy().value_in_unit(unit.kilojoules_per_mole),
+            state.getKineticEnergy().value_in_unit(unit.kilojoules_per_mole),
+        ]
+        self._out.write(self.get_formated_str(out_list))
+        self._out.flush()
+
+class CustomForceReporter(CustomReporter):
+    def __init__(self, file, reportInterval, force_group, atom_idx):
+        self._out = open(file, 'w')
+        # with h5py.File(file, 'w') as f:
+        #     self._out = f.create_dataset('dataset')
+        # self._out = h5py.File(file, 'w')
+        self._reportInterval = reportInterval
+        self._force_group = force_group
+        self._atom_idx = atom_idx
+
+        ## Since I don't think I will every use bitmaps for this, enforce this to be a set
+        if type(self._force_group) == int:
+            self._force_group = {self._force_group}
+        elif type(self._force_group) == list:
+            self._force_group = set(self._force_group)
+
+    def describeNextReport(self, simulation):
+        steps = self._reportInterval - simulation.currentStep % self._reportInterval
+        return (steps, False, False, False, False, None)
+
+    def report(self, simulation, state):
+        state = simulation.context.getState(getForces=True,
+                                            getEnergy=True,
+                                            groups=self._force_group)
+        forces = state.getForces(asNumpy=True).value_in_unit(unit.kilojoules_per_mole / unit.nanometer)
+        write_list = ["\t".join(f'{i:.2f}' for i in force) for force in forces[self._atom_idx]]
+        write_string = "\t".join(write_list) + "\n"
+        self._out.write(write_string)
+        self._out.flush()
 
 def save_free_energies(output_dir, meta):
     print("Writing final free energies")

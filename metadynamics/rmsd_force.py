@@ -9,7 +9,7 @@ import yaml
 
 repo_path = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}"
 sys.path.append(repo_path)
-from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building as cv
+from enhanced_sampling import utils, system_building as sb, system_saving as ss, reporters, cv_building as cv, schema
 
 
 ## ARGUMENT PARSING
@@ -51,9 +51,9 @@ def main():
     psf = input_dict["psf"]
     print(psf.topology)
 
-    params = sb.SimParams(args.params_file)
+    params = schema.SimParams(args.params_file)
     print(params)
-    meta_params = sb.MetaParams(args.meta_params)
+    meta_params = schema.MetaParams(args.meta_params)
     print(meta_params)
 
     system = psf.createSystem(input_dict["params"],
